@@ -1,1 +1,2020 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>穿梭 - 踏著潮濕的足跡，走讀這座城市的呼吸</title>
 
+  <!-- Google Fonts: Shippori Antique B1 & Zen Maru Gothic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paperBase: '#f6f1e7',
+            paperLight: '#fcf8f2',
+            keelungSea: '#7fc5be',
+            keelungSeaDark: '#549c95',
+            keelungSeaLight: '#c2e7e3',
+            brickCoral: '#e57361',
+            brickCoralDark: '#c7513e',
+            rainYellow: '#f5c84c',
+            rainYellowDark: '#d8aa2b',
+            harborNavy: '#233748',
+            deepIndigo: '#172430',
+            mistLilac: '#cdbed8',
+            fishSilver: '#dce8f0'
+          },
+          fontFamily: {
+            shippori: ['"Shippori Antique B1"', '"Zen Maru Gothic"', 'sans-serif'],
+          },
+          boxShadow: {
+            'paperEdge': '0 8px 0px #233748, 0 16px 24px rgba(35,55,72,0.18)',
+            'paperBtn': '0 4px 0px #233748, 0 6px 12px rgba(35,55,72,0.18)',
+            'paperInner': 'inset 0 2px 6px rgba(35,55,72,0.1)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --app-height: 100dvh;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      height: var(--app-height);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      font-family: 'Shippori Antique B1', 'Zen Maru Gothic', sans-serif;
+      background-color: #f6f1e7;
+      color: #233748;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app-viewport-container {
+      min-height: 100vh;
+      min-height: var(--app-height);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      padding-left: var(--safe-left);
+      padding-right: var(--safe-right);
+    }
+
+    .keelung-paper-bg {
+      background: radial-gradient(circle at 16% 12%, rgba(245, 200, 76, 0.4) 0%, transparent 40%),
+                  radial-gradient(circle at 84% 18%, rgba(127, 197, 190, 0.42) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 82%, rgba(229, 115, 97, 0.3) 0%, transparent 55%),
+                  #f6f1e7;
+      background-attachment: fixed;
+    }
+
+    .stamp-container {
+      background: #ffffff;
+      border: 8px solid #fdfbf7;
+      border-radius: 18px;
+      box-shadow: 0 10px 24px rgba(35,55,72,0.18);
+      position: relative;
+    }
+    .stamp-perforations {
+      position: absolute;
+      inset: -6px;
+      pointer-events: none;
+      background: radial-gradient(circle, transparent 5px, #f6f1e7 5.5px);
+      background-size: 18px 18px;
+      z-index: 10;
+    }
+
+    .stamp-viewfinder-frame {
+      border: 6px solid #f5c84c;
+      outline: 2px dashed #e57361;
+      outline-offset: -10px;
+      position: relative;
+    }
+
+    @keyframes kite-glide {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(2deg) scale(1.02); }
+    }
+    .animate-kite {
+      animation: kite-glide 5.2s ease-in-out infinite;
+    }
+
+    @keyframes fish-splash {
+      0%, 100% { transform: translateY(0) rotate(-6deg); }
+      50% { transform: translateY(-8px) rotate(6deg); }
+    }
+    .animate-fish {
+      animation: fish-splash 3.4s ease-in-out infinite;
+    }
+
+    @keyframes ship-drift {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-ship {
+      animation: ship-drift 4.8s ease-in-out infinite;
+    }
+
+    .hero-title-fluid {
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+    }
+    .hero-subtitle-fluid {
+      font-size: clamp(0.85rem, 2.2vw, 1.15rem);
+    }
+  </style>
+</head>
+<body class="keelung-paper-bg selection:bg-rainYellow selection:text-deepIndigo">
+
+  <div class="app-viewport-container relative">
+
+    <!-- 背景動態裝飾 -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      <div class="absolute top-16 left-6 animate-kite opacity-25">
+        <svg class="w-10 h-10 sm:w-14 sm:h-14" viewBox="0 0 100 100" fill="#233748">
+          <path d="M10,50 Q40,24 50,44 Q60,24 90,50 Q65,48 50,68 Q35,48 10,50 Z"/>
+        </svg>
+      </div>
+      <div class="absolute bottom-24 left-6 animate-fish opacity-25">
+        <svg class="w-9 h-9 sm:w-12 sm:h-12" viewBox="0 0 100 100" fill="#7fc5be">
+          <ellipse cx="50" cy="50" rx="30" ry="14" fill="#7fc5be"/>
+          <polygon points="20,50 5,35 5,65" fill="#549c95"/>
+        </svg>
+      </div>
+      <div class="absolute top-28 right-8 opacity-35 animate-bounce" style="animation-duration: 4s;">
+        <span class="text-brickCoral font-black text-xl">♪</span>
+      </div>
+    </div>
+
+    <!-- 頂部導航 -->
+    <header class="sticky top-0 z-40 bg-paperBase/94 backdrop-blur-md border-b-2 border-harborNavy/15 px-3 sm:px-6 py-2.5 sm:py-3.5 flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-2 sm:gap-3 cursor-pointer" onclick="window.navigateTo('home')">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-keelungSeaLight/60 border-2 border-harborNavy flex items-center justify-center relative overflow-hidden shadow-sm flex-shrink-0">
+          <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="42" fill="#7fc5be" stroke="#233748" stroke-width="4"/>
+            <circle cx="50" cy="50" r="26" stroke="#233748" stroke-width="3" fill="#ffffff"/>
+            <circle cx="50" cy="50" r="14" stroke="#233748" stroke-width="2.5" fill="#f5c84c"/>
+            <circle cx="50" cy="50" r="4" fill="#e57361"/>
+            <path d="M22 68 Q50 58 78 68" stroke="#233748" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-2xl font-black tracking-widest text-harborNavy flex items-center gap-1.5 sm:gap-2">
+            <span>穿梭</span>
+            <span class="text-[10px] sm:text-xs font-black bg-rainYellow text-deepIndigo px-2 py-0.5 rounded-full border border-harborNavy/30">
+              走讀基隆
+            </span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="window.openAlbumModal()" class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-black bg-white text-harborNavy border-2 border-harborNavy rounded-full shadow-paperBtn hover:-translate-y-0.5 active:translate-y-0 transition-all">
+          <i data-lucide="book-marked" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brickCoral"></i>
+          <span class="hidden xs:inline">集郵手帳</span>
+          <span id="nav-stamp-badge" class="bg-brickCoral text-white px-1.5 py-0.2 rounded-full text-[10px] font-black">0</span>
+        </button>
+
+        <button id="master-melody-btn" onclick="window.openMelodyModal()" class="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-black bg-keelungSea text-deepIndigo border-2 border-harborNavy rounded-full shadow-paperBtn hover:bg-keelungSeaLight active:translate-y-0 transition-all">
+          <i data-lucide="disc-3" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-deepIndigo"></i>
+          <span class="hidden xs:inline">地點主題曲</span>
+          <span id="nav-songs-badge" class="bg-rainYellow text-deepIndigo px-1.5 py-0.2 rounded-full text-[10px] font-black">0/3</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- 主視圖容器 -->
+    <main class="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-3 sm:py-6 relative z-10 flex flex-col justify-center">
+
+      <!-- 1. 【首頁 HOME】 -->
+      <section id="view-home" class="view-panel flex flex-col items-center justify-center flex-1 text-center py-1 sm:py-4">
+        
+        <div class="relative w-full max-w-2xl h-56 sm:h-72 lg:h-80 my-1 sm:my-3 flex items-center justify-center">
+          <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 600 360" fill="none">
+            <circle cx="300" cy="70" r="52" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+            <path d="M120 40 L124 50 L134 54 L124 58 L120 68 L116 58 L106 54 L116 50 Z" fill="#f5c84c" opacity="0.85"/>
+            <path d="M480 50 L483 58 L491 61 L483 64 L480 72 L477 64 L469 61 L477 58 Z" fill="#f5c84c" opacity="0.85"/>
+
+            <path d="M40 330 C120 180 200 160 300 160 C400 160 480 180 560 330 Z" fill="#c2e7e3" opacity="0.75"/>
+            <path d="M0 360 L140 220 C180 190 220 270 250 360 Z" fill="#e57361" stroke="#233748" stroke-width="3" opacity="0.95"/>
+            <path d="M360 360 C380 250 440 190 510 220 L600 360 Z" fill="#7fc5be" stroke="#233748" stroke-width="3" opacity="0.95"/>
+
+            <ellipse cx="300" cy="335" rx="270" ry="32" fill="#7fc5be" opacity="0.75"/>
+            <path d="M150 330 Q200 320 250 330" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M350 336 Q400 326 450 336" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+
+            <g class="animate-ship" style="transform-origin: 300px 255px;">
+              <path d="M210 268 L390 268 L368 310 L232 310 Z" fill="#ffffff" stroke="#233748" stroke-width="3.5"/>
+              <path d="M222 282 L378 282 L372 294 L228 294 Z" fill="#233748"/>
+              <rect x="245" y="242" width="110" height="26" rx="5" fill="#ffffff" stroke="#233748" stroke-width="3"/>
+              <circle cx="265" cy="255" r="3.5" fill="#f5c84c"/><circle cx="285" cy="255" r="3.5" fill="#f5c84c"/>
+              <circle cx="305" cy="255" r="3.5" fill="#f5c84c"/><circle cx="325" cy="255" r="3.5" fill="#f5c84c"/><circle cx="345" cy="255" r="3.5" fill="#f5c84c"/>
+              <path d="M285 242 L285 226 L299 226 L299 242 Z" fill="#e57361" stroke="#233748" stroke-width="2.5"/>
+              <rect x="283" y="224" width="18" height="4" fill="#233748"/>
+            </g>
+
+            <g transform="translate(180, 310)">
+              <rect x="0" y="0" width="240" height="18" rx="4" fill="#f6f1e7" stroke="#233748" stroke-width="2.5"/>
+              <line x1="40" y1="0" x2="40" y2="18" stroke="#233748" stroke-width="2"/>
+              <line x1="80" y1="0" x2="80" y2="18" stroke="#233748" stroke-width="2"/>
+              <line x1="120" y1="0" x2="120" y2="18" stroke="#233748" stroke-width="2"/>
+              <line x1="160" y1="0" x2="160" y2="18" stroke="#233748" stroke-width="2"/>
+              <line x1="200" y1="0" x2="200" y2="18" stroke="#233748" stroke-width="2"/>
+            </g>
+
+            <g class="animate-kite" style="transform-origin: 430px 115px;">
+              <path d="M380 120 Q425 85 440 110 Q455 85 500 120 Q455 115 440 138 Q425 115 380 120 Z" fill="#233748" stroke="#ffffff" stroke-width="2"/>
+              <circle cx="440" cy="115" r="3.5" fill="#f5c84c"/>
+            </g>
+
+            <g transform="translate(70, 110)">
+              <line x1="40" y1="0" x2="40" y2="55" stroke="#233748" stroke-width="2"/>
+              <rect x="33" y="55" width="14" height="8" rx="2" fill="#233748"/>
+              <circle cx="40" cy="72" r="16" fill="#f5c84c" stroke="#233748" stroke-width="2.5"/>
+              <circle cx="40" cy="72" r="24" fill="#f5c84c" opacity="0.25"/>
+            </g>
+
+            <g transform="translate(60, 245)">
+              <polygon points="15,40 75,40 68,76 22,76" fill="#e57361" stroke="#233748" stroke-width="3"/>
+              <line x1="20" y1="52" x2="70" y2="52" stroke="#ffffff" stroke-width="2.5"/>
+              <line x1="24" y1="64" x2="66" y2="64" stroke="#ffffff" stroke-width="2.5"/>
+            </g>
+
+            <g class="animate-fish" style="transform-origin: 130px 220px;">
+              <g transform="translate(95, 200) rotate(-22)">
+                <ellipse cx="38" cy="20" rx="26" ry="11" fill="#dce8f0" stroke="#233748" stroke-width="2.5"/>
+                <polygon points="12,20 0,8 0,32" fill="#7fc5be" stroke="#233748" stroke-width="2"/>
+                <circle cx="52" cy="17" r="3" fill="#233748"/>
+              </g>
+            </g>
+
+            <g transform="translate(440, 255)">
+              <rect x="0" y="10" width="60" height="42" rx="7" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+              <rect x="24" y="2" width="12" height="9" rx="2" fill="none" stroke="#233748" stroke-width="2.5"/>
+              <line x1="18" y1="10" x2="18" y2="52" stroke="#233748" stroke-width="2.5"/>
+              <line x1="42" y1="10" x2="42" y2="52" stroke="#233748" stroke-width="2.5"/>
+            </g>
+
+            <g transform="translate(515, 260)">
+              <circle cx="28" cy="28" r="22" fill="#233748" stroke="#233748" stroke-width="2"/>
+              <circle cx="28" cy="28" r="14" fill="none" stroke="#7fc5be" stroke-width="1.5"/>
+              <circle cx="28" cy="28" r="7" fill="#f5c84c"/>
+              <circle cx="28" cy="28" r="2.5" fill="#e57361"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="space-y-1.5 sm:space-y-2.5 mb-4 sm:mb-6">
+          <h2 class="hero-title-fluid font-black tracking-widest text-harborNavy drop-shadow-sm">
+            穿 梭
+          </h2>
+          <div class="inline-block bg-white/90 backdrop-blur-sm px-4 sm:px-6 py-1.5 rounded-full border-2 border-harborNavy/25 shadow-sm max-w-full">
+            <p class="hero-subtitle-fluid text-harborNavy font-bold tracking-wider truncate">
+              踏著潮濕的足跡，走讀這座城市的呼吸
+            </p>
+          </div>
+        </div>
+
+        <!-- 三大入口卡片 (直接調用掛載在全域的 startMode) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5 w-full max-w-5xl px-1">
+          
+          <button onclick="window.startMode('look')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden">
+            <div class="absolute -top-6 -right-6 w-20 h-20 bg-keelungSea/25 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
+            <div>
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-keelungSea/30 border-2 border-harborNavy flex items-center justify-center text-harborNavy mb-2.5 sm:mb-3">
+                <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none">
+                  <path d="M15 65 L85 65 L75 85 L25 85 Z" fill="#ffffff" stroke="#233748" stroke-width="4"/>
+                  <rect x="30" y="44" width="40" height="21" rx="3" fill="#7fc5be" stroke="#233748" stroke-width="3"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full bg-keelungSea text-deepIndigo">實境掃描</span>
+                <span class="text-[10px] sm:text-xs text-harborNavy/70 font-bold">12 處 AR 點</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-harborNavy mb-1 group-hover:text-brickCoral transition-colors">看見基隆</h3>
+              <p class="text-[11px] sm:text-xs text-harborNavy/80 leading-relaxed font-bold">
+                展開手繪地圖，探索海洋廣場、崁仔頂與委託行！透過郵票外型鏡頭感應物件、聆聽音樂，集齊子地點解鎖專屬歌曲，製作齒孔郵票。
+              </p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t-2 border-dashed border-harborNavy/20 flex items-center justify-between text-xs font-black text-deepIndigo">
+              <span>開啟漫步</span>
+              <i data-lucide="arrow-right-circle" class="w-4 h-4 sm:w-5 sm:h-5 text-brickCoral group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </button>
+
+          <button onclick="window.startMode('feel')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden">
+            <div class="absolute -top-6 -right-6 w-20 h-20 bg-brickCoral/20 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
+            <div>
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brickCoral/25 border-2 border-harborNavy flex items-center justify-center text-harborNavy mb-2.5 sm:mb-3">
+                <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none">
+                  <ellipse cx="50" cy="50" rx="30" ry="14" fill="#dce8f0" stroke="#233748" stroke-width="3.5"/>
+                  <polygon points="20,50 5,34 5,66" fill="#7fc5be" stroke="#233748" stroke-width="3"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full bg-brickCoral text-white">五感微風</span>
+                <span class="text-[10px] sm:text-xs text-harborNavy/70 font-bold">觸覺引導與情感提示</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-harborNavy mb-1 group-hover:text-brickCoral transition-colors">感受基隆</h3>
+              <p class="text-[11px] sm:text-xs text-harborNavy/80 leading-relaxed font-bold">
+                融合雨都肌理。在 AR 掃描與拍照集郵畫面下方，常駐呈現「觸覺引導、情感提示字卡小視窗」，感受微涼海風、冰冷碎冰與復古皮箱質感。
+              </p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t-2 border-dashed border-harborNavy/20 flex items-center justify-between text-xs font-black text-brickCoralDark">
+              <span>喚醒觸覺</span>
+              <i data-lucide="arrow-right-circle" class="w-4 h-4 sm:w-5 sm:h-5 text-brickCoralDark group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </button>
+
+          <button onclick="window.startMode('understand')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden">
+            <div class="absolute -top-6 -right-6 w-20 h-20 bg-rainYellow/30 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
+            <div>
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-rainYellow/35 border-2 border-harborNavy flex items-center justify-center text-harborNavy mb-2.5 sm:mb-3">
+                <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none">
+                  <rect x="22" y="36" width="56" height="38" rx="6" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+                  <rect x="42" y="26" width="16" height="11" rx="2" fill="none" stroke="#233748" stroke-width="2.5"/>
+                </svg>
+              </div>
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full bg-rainYellow text-deepIndigo">歷史問答</span>
+                <span class="text-[10px] sm:text-xs text-harborNavy/70 font-bold">3選1題目與語音解說</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-harborNavy mb-1 group-hover:text-brickCoral transition-colors">讀懂基隆</h3>
+              <p class="text-[11px] sm:text-xs text-harborNavy/80 leading-relaxed font-bold">
+                進入點位後，挑戰「3 選 1 歷史問答」，無論成功或失敗均提供深度解說與語音朗讀，隨後進入 AR 郵票取景與集郵！
+              </p>
+            </div>
+            <div class="mt-3 pt-2.5 border-t-2 border-dashed border-harborNavy/20 flex items-center justify-between text-xs font-black text-deepIndigo">
+              <span>歷史問答</span>
+              <i data-lucide="arrow-right-circle" class="w-4 h-4 sm:w-5 sm:h-5 text-brickCoral group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- 2. 【地圖探索 MAP VIEW】 -->
+      <section id="view-map" class="view-panel hidden flex-col flex-1">
+        
+        <div class="flex flex-wrap items-center justify-between gap-2.5 mb-3 bg-white/94 border-2 border-harborNavy rounded-2xl p-2.5 sm:p-3 shadow-paperEdge">
+          <div class="flex items-center gap-2">
+            <button onclick="window.navigateTo('home')" class="p-1.5 sm:p-2 hover:bg-paperBase rounded-xl border border-harborNavy/30 text-harborNavy">
+              <i data-lucide="arrow-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+            </button>
+            <div>
+              <div class="text-[11px] sm:text-xs text-brickCoral font-bold flex items-center gap-1">
+                <span id="map-mode-label">看見基隆</span>
+                <span>・核心地圖</span>
+              </div>
+              <p class="text-xs sm:text-sm font-black text-harborNavy">選擇子地點展開 AR 採集</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 bg-paperBase px-3 py-1 sm:py-1.5 rounded-xl border border-harborNavy/30 text-[11px] sm:text-xs font-bold">
+            <i data-lucide="disc" class="w-3.5 h-3.5 text-brickCoral animate-spin" style="animation-duration: 8s;"></i>
+            <span>專屬曲解鎖：</span>
+            <span id="map-music-progress" class="text-brickCoralDark font-black">0 / 3 首</span>
+          </div>
+        </div>
+
+        <div class="relative flex-1 min-h-[460px] sm:min-h-[540px] lg:min-h-[620px] bg-[#ebdccb] rounded-2xl sm:rounded-3xl border-3 border-harborNavy overflow-hidden shadow-paperEdge flex flex-col justify-between">
+          
+          <svg class="absolute inset-0 w-full h-full object-cover pointer-events-none" viewBox="0 0 800 600" preserveAspectRatio="none">
+            <rect width="800" height="600" fill="#e9ded0"/>
+            <path d="M420,0 C395,140 320,240 280,360 C250,460 300,530 390,600 L590,600 C540,460 520,260 560,0 Z" fill="#b5ded9" opacity="0.85"/>
+            <path d="M0,0 L270,0 C230,130 170,270 100,400 L0,500 Z" fill="#f5c84c" opacity="0.45"/>
+            <path d="M0,320 C80,360 140,460 120,600 L0,600 Z" fill="#7fc5be" opacity="0.5"/>
+            <path d="M600,0 C680,130 730,280 800,340 L800,0 Z" fill="#e57361" opacity="0.45"/>
+            <path d="M610,350 C570,480 640,550 800,600 L800,350 Z" fill="#cdbed8" opacity="0.65"/>
+
+            <g transform="translate(370, 160) scale(0.65)">
+              <path d="M10,60 L140,60 L120,88 L30,88 Z" fill="#e57361" stroke="#233748" stroke-width="3"/>
+              <rect x="35" y="32" width="70" height="28" rx="4" fill="#ffffff" stroke="#233748" stroke-width="3"/>
+            </g>
+            <g transform="translate(160, 390) scale(0.65)">
+              <ellipse cx="60" cy="30" rx="40" ry="18" fill="#dce8f0" stroke="#233748" stroke-width="3"/>
+            </g>
+            <g transform="translate(620, 270) scale(0.65)">
+              <rect x="0" y="10" width="65" height="44" rx="7" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+            </g>
+          </svg>
+
+          <!-- 區域標籤 -->
+          <div class="relative z-10 p-2.5 sm:p-4 flex flex-wrap gap-1.5 sm:gap-2">
+            <button onclick="window.filterAreaSpots('all')" id="tab-filter-all" class="map-filter-btn px-3 py-1 bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border-2 border-harborNavy shadow-sm active">全部 (12)</button>
+            <button onclick="window.filterAreaSpots('ocean')" id="tab-filter-ocean" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-keelungSea border border-harborNavy"></span>
+              <span>海洋廣場 (<span id="progress-ocean-tag">0/3</span>)</span>
+            </button>
+            <button onclick="window.filterAreaSpots('kan')" id="tab-filter-kan" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-brickCoral border border-harborNavy"></span>
+              <span>崁仔頂 (<span id="progress-kan-tag">0/6</span>)</span>
+            </button>
+            <button onclick="window.filterAreaSpots('wei')" id="tab-filter-wei" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-rainYellow border border-harborNavy"></span>
+              <span>委託行 (<span id="progress-wei-tag">0/3</span>)</span>
+            </button>
+          </div>
+
+          <!-- 12 個 AR 點位圖層 -->
+          <div id="map-pins-layer" class="relative z-10 w-full flex-1"></div>
+
+          <!-- 底部資訊條 -->
+          <div class="relative z-10 m-2 sm:m-3 p-2.5 sm:p-3 bg-white/94 backdrop-blur-sm rounded-xl sm:rounded-2xl border-2 border-harborNavy/25 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 shadow-sm">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-rainYellow/60 border border-harborNavy flex items-center justify-center text-harborNavy flex-shrink-0">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <p class="text-[11px] sm:text-xs text-harborNavy font-bold">點選圖示開啟 AR 掃描！集齊該區所有子點可解鎖專屬完整歌曲！</p>
+            </div>
+            <button onclick="window.openMelodyModal()" class="w-full sm:w-auto px-3 py-1.5 bg-brickCoral text-white font-black text-xs rounded-xl border border-harborNavy shadow-paperBtn hover:bg-brickCoralDark active:translate-y-0.5 transition-all text-center">
+              查看專屬曲
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. 【讀懂基隆：3 選 1 歷史互動問答】 -->
+      <section id="view-story" class="view-panel hidden flex-col flex-1 max-w-2xl mx-auto w-full">
+        <div class="bg-white border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-paperEdge relative flex flex-col justify-between">
+          
+          <div class="flex items-center justify-between mb-2.5">
+            <button onclick="window.navigateTo('map')" class="flex items-center gap-1 text-xs font-black text-harborNavy px-2.5 py-1 rounded-xl border border-harborNavy/30 bg-paperBase">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i> 返回地圖
+            </button>
+            <span class="px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-black bg-rainYellow text-deepIndigo border border-harborNavy/30">
+              讀懂基隆・歷史小試身手
+            </span>
+          </div>
+
+          <div class="space-y-3">
+            <div id="story-art-banner" class="w-full h-28 sm:h-36 bg-paperBase rounded-2xl border-2 border-harborNavy/20 flex items-center justify-center overflow-hidden"></div>
+
+            <div>
+              <span id="quiz-spot-tag" class="text-[10px] font-black text-brickCoralDark bg-brickCoral/15 px-2 py-0.5 rounded-md">子地點歷史問答</span>
+              <h2 id="quiz-question-title" class="text-base sm:text-xl font-black text-harborNavy mt-1">
+                歷史題目載入中...
+              </h2>
+            </div>
+
+            <!-- 3 選 1 選項 -->
+            <div id="quiz-options-container" class="space-y-2"></div>
+
+            <!-- 作答後反饋與解說卡 -->
+            <div id="quiz-explanation-box" class="hidden p-3.5 rounded-2xl border-2 border-harborNavy/20 bg-paperBase space-y-2">
+              <div class="flex items-center justify-between">
+                <span id="quiz-status-pill" class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-500 text-white">答對了！</span>
+                
+                <button id="voice-quiz-btn" onclick="window.toggleQuizSpeech()" class="flex items-center gap-1 px-3 py-1 bg-keelungSea text-deepIndigo font-black text-xs rounded-xl border border-harborNavy shadow-sm hover:bg-keelungSeaLight">
+                  <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+                  <span id="voice-quiz-btn-text">語音解說朗讀</span>
+                </button>
+              </div>
+
+              <div class="pt-1 border-t border-harborNavy/10">
+                <h4 class="text-xs font-black text-harborNavy mb-1">【文史典故解說】</h4>
+                <p id="quiz-explanation-text" class="text-xs text-harborNavy/90 font-bold leading-relaxed whitespace-pre-line"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 前往 AR 取景 -->
+          <div class="mt-4 pt-3 border-t-2 border-harborNavy/15 flex items-center justify-end">
+            <button id="btn-proceed-to-ar" onclick="window.proceedToARFromQuiz()" disabled class="flex items-center gap-2 px-5 py-2.5 bg-brickCoral text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-harborNavy shadow-paperEdge hover:bg-brickCoralDark active:translate-y-0.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+              <span>前往 AR 郵票取景掃描</span>
+              <i data-lucide="camera" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. 【AR 掃描畫面 AR VIEW】：郵票鏤空取景窗 -->
+      <section id="view-ar" class="view-panel hidden flex-col flex-1 max-w-2xl mx-auto w-full">
+        <div class="bg-harborNavy text-paperBase border-3 border-deepIndigo rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-2xl relative flex flex-col justify-between overflow-hidden min-h-[480px] sm:min-h-[540px]">
+          
+          <div class="flex items-center justify-between z-20 pb-1.5">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-rainYellow animate-ping"></span>
+              <span class="text-[11px] sm:text-xs tracking-wider uppercase text-rainYellow font-black">AR Stamp Viewfinder</span>
+            </div>
+            <button onclick="window.closeARScan()" class="text-xs bg-white/20 hover:bg-white/30 text-white px-2.5 py-1 rounded-full border border-white/20 font-bold">
+              返回地圖
+            </button>
+          </div>
+
+          <div class="relative flex-1 my-2 rounded-2xl overflow-hidden bg-[#152230] flex items-center justify-center border-2 border-keelungSea/40 min-h-[300px]">
+            
+            <video id="ar-video-feed" autoplay playsinline muted class="absolute inset-0 w-full h-full object-cover hidden"></video>
+
+            <div id="ar-fallback-art" class="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
+              <svg class="w-full h-full opacity-20" viewBox="0 0 400 300" fill="none">
+                <path d="M0 220 Q100 190 200 220 T400 220 L400 300 L0 300 Z" fill="#7fc5be"/>
+                <circle cx="200" cy="110" r="50" fill="#f5c84c"/>
+                <path d="M120 180 L280 180 L250 215 L150 215 Z" fill="#e57361"/>
+              </svg>
+            </div>
+
+            <!-- 郵票造型鏤空取景視窗 -->
+            <div class="stamp-viewfinder-frame relative z-10 w-52 h-64 sm:w-64 sm:h-80 rounded-2xl bg-black/20 backdrop-blur-[1px] flex flex-col items-center justify-between p-3.5 shadow-2xl">
+              
+              <div class="w-full flex justify-between items-center text-[10px] text-rainYellow font-black tracking-widest border-b border-rainYellow/40 pb-1">
+                <span>KEELUNG 2026</span>
+                <span>NT$ 15</span>
+              </div>
+
+              <!-- 偵測浮現之在地物件 -->
+              <div id="ar-monster-target" class="cursor-pointer transition-all duration-300 scale-95 hover:scale-105 active:scale-95 text-center flex flex-col items-center my-auto" onclick="window.completeARScan()">
+                <div id="ar-target-icon-box" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white/95 border-3 border-harborNavy p-2 flex items-center justify-center shadow-paperEdge animate-bounce"></div>
+                <span id="ar-target-name-badge" class="mt-2 text-[11px] sm:text-xs bg-rainYellow text-deepIndigo font-black px-2.5 py-0.5 rounded-full shadow-sm">
+                  發現目標！點擊採集
+                </span>
+              </div>
+
+              <div class="w-full text-center text-[9px] text-white/70 font-mono tracking-wider pt-1 border-t border-rainYellow/40">
+                STAMP APERTURE
+              </div>
+            </div>
+
+            <div class="absolute bottom-2.5 left-2.5 right-2.5 bg-harborNavy/85 backdrop-blur-sm p-2 rounded-xl border border-white/20 flex items-center justify-between text-xs">
+              <span id="ar-status-text" class="text-rainYellow font-bold flex items-center gap-1.5 text-[11px]">
+                <i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> 感應在地氣息中...
+              </span>
+              <button onclick="window.completeARScan()" class="px-3 py-1 bg-keelungSea text-deepIndigo font-black rounded-lg text-xs">
+                立即採集
+              </button>
+            </div>
+
+          </div>
+
+          <!-- 觸覺引導與情感提示字卡小視窗 -->
+          <div id="ar-sensory-panel" class="hidden mt-1.5 bg-paperBase text-harborNavy p-3 rounded-2xl border-2 border-harborNavy/30 shadow-md">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-brickCoral"></span>
+              <span class="text-[11px] font-black tracking-wider text-brickCoralDark">觸覺引導・情感提示字卡</span>
+            </div>
+            <p id="ar-sensory-text" class="text-[11px] sm:text-xs font-bold text-harborNavy/85 leading-relaxed">
+              輕觸身旁的木棧道或石板，感受海風凝結的濕潤水氣；深吸一口帶有鹹味的空氣，體會港灣這片刻的平靜。
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. 【音樂片段解鎖與播放器 REWARD VIEW】 -->
+      <section id="view-reward" class="view-panel hidden flex-col flex-1 max-w-lg mx-auto w-full">
+        <div class="bg-white border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-paperEdge text-center relative flex flex-col justify-between">
+          
+          <div>
+            <div id="reward-icon-container" class="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full bg-keelungSea/30 border-3 border-harborNavy flex items-center justify-center mb-3 relative">
+              <span class="absolute -top-1 -right-1 w-6 h-6 bg-rainYellow text-deepIndigo font-black text-xs rounded-full border border-harborNavy flex items-center justify-center">♪</span>
+            </div>
+
+            <span class="text-[10px] sm:text-xs font-black px-2.5 py-0.5 bg-paperBase text-brickCoralDark rounded-full border border-harborNavy/20">
+              成功採集子地點樂句
+            </span>
+            <h2 id="reward-spot-title" class="text-xl sm:text-2xl font-black text-harborNavy mt-2 mb-1">
+              海洋廣場・海港天際線與巨輪
+            </h2>
+            <p id="reward-spot-desc" class="text-xs text-harborNavy/70 font-bold mb-3">
+              已聆聽到這段子地點的專屬樂句。
+            </p>
+
+            <div class="bg-paperBase p-2.5 rounded-xl border border-harborNavy/20 mb-3 text-left">
+              <div class="flex justify-between text-[11px] font-black text-harborNavy mb-1">
+                <span id="region-progress-name">海洋廣場進度</span>
+                <span id="region-progress-count" class="text-brickCoralDark">1 / 3 子地點</span>
+              </div>
+              <div class="w-full h-2 bg-white rounded-full overflow-hidden border border-harborNavy/30">
+                <div id="region-progress-bar" class="h-full bg-brickCoral transition-all duration-500" style="width: 33%;"></div>
+              </div>
+            </div>
+
+            <!-- 單點樂句播放 -->
+            <div class="bg-paperBase border-2 border-harborNavy/25 rounded-2xl p-2.5 sm:p-3 mb-3 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <button id="reward-play-btn" onclick="window.playSingleSpotAudio()" class="w-10 h-10 rounded-xl bg-brickCoral text-white flex items-center justify-center border-2 border-harborNavy shadow-sm hover:bg-brickCoralDark active:translate-y-0.5">
+                  <i id="reward-play-icon" data-lucide="play" class="w-4 h-4"></i>
+                </button>
+                <div class="text-left">
+                  <p id="reward-melody-name" class="text-xs sm:text-sm font-black text-harborNavy">子點短旋律片段</p>
+                  <p class="text-[10px] text-harborNavy/60 font-bold">點擊重播此子點樂句</p>
+                </div>
+              </div>
+              <div class="flex items-end gap-1 h-4">
+                <span class="w-1 bg-brickCoral rounded-full h-2.5 animate-pulse"></span>
+                <span class="w-1 bg-rainYellow rounded-full h-4 animate-pulse" style="animation-delay: 0.2s;"></span>
+                <span class="w-1 bg-keelungSea rounded-full h-3 animate-pulse" style="animation-delay: 0.4s;"></span>
+              </div>
+            </div>
+
+            <!-- 專屬完整歌曲解鎖公告 (集齊時顯示) -->
+            <div id="full-region-song-box" class="hidden mb-3 p-3 bg-rainYellow/35 border-2 border-rainYellow rounded-2xl text-left shadow-sm">
+              <div class="flex items-center gap-1.5 mb-1">
+                <span class="text-base">🎉</span>
+                <h4 class="text-xs font-black text-deepIndigo">恭喜解鎖：該地點專屬完整歌曲！</h4>
+              </div>
+              <p id="full-region-song-title" class="text-[11px] sm:text-xs text-harborNavy font-black mb-2">《委託行專屬樂章：洋貨留聲機與復古巷弄爵士》</p>
+              <button id="play-full-unlocked-song-btn" onclick="window.playCurrentRegionFullSong()" class="w-full py-1.5 bg-white text-deepIndigo text-xs font-black rounded-xl border border-harborNavy flex items-center justify-center gap-1.5 hover:bg-paperBase">
+                <i data-lucide="play-circle" class="w-3.5 h-3.5 text-brickCoral"></i>
+                <span>立即聆聽本區完整歌曲</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-1">
+            <button onclick="window.goToStampMaker()" class="w-full py-3 px-3 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-sm sm:text-base rounded-2xl border-2 border-harborNavy shadow-paperEdge active:translate-y-0.5 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="stamp" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              <span>跳轉至：拍照製作郵票完成集郵</span>
+            </button>
+
+            <button onclick="window.navigateTo('map')" class="w-full py-2 px-3 bg-white hover:bg-paperBase text-harborNavy font-bold text-xs sm:text-sm rounded-xl border border-harborNavy/30">
+              返回地圖探索其他子地點
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 6. 【拍照製作郵票 STAMP MAKER VIEW】 -->
+      <section id="view-stamp" class="view-panel hidden flex-col flex-1 max-w-lg mx-auto w-full">
+        <div class="bg-white border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-paperEdge relative flex flex-col justify-between">
+          
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-black px-2.5 py-0.5 bg-keelungSea text-deepIndigo rounded-full border border-harborNavy/30">
+              基隆漫步紀念集郵所
+            </span>
+            <button onclick="window.navigateTo('home')" class="text-xs font-bold text-harborNavy/70 hover:text-harborNavy">
+              返回首頁
+            </button>
+          </div>
+
+          <div class="stamp-container p-3 sm:p-4 relative overflow-hidden my-1 flex flex-col items-center">
+            <div class="stamp-perforations"></div>
+
+            <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-harborNavy bg-paperBase flex items-center justify-center">
+              <video id="stamp-camera-video" autoplay playsinline muted class="absolute inset-0 w-full h-full object-cover hidden"></video>
+              <canvas id="stamp-capture-canvas" class="w-full h-full object-cover"></canvas>
+
+              <div id="stamp-seal-badge" class="absolute bottom-2 right-2 pointer-events-none transform -rotate-12">
+                <div class="w-20 h-20 sm:w-22 sm:h-22 rounded-full border-2 border-dashed border-[#c43b2b] text-[#c43b2b] p-1 flex flex-col items-center justify-center font-bold text-[8px] sm:text-[9px] bg-white/80 backdrop-blur-sm shadow-sm">
+                  <span class="tracking-widest">KEELUNG</span>
+                  <span class="text-[7px] sm:text-[8px] my-0.5 font-mono">2026.10.15</span>
+                  <span id="stamp-seal-name" class="text-[8px] font-black">海洋廣場・黑鳶之印</span>
+                </div>
+              </div>
+
+              <div class="absolute top-2 left-2 px-2 py-0.5 bg-white/80 rounded-md border border-harborNavy/40 text-[10px] font-black text-harborNavy">
+                NT$ 15・基隆
+              </div>
+            </div>
+
+            <div class="mt-2.5 text-center">
+              <h4 id="stamp-title-display" class="font-black text-sm sm:text-base text-harborNavy">海洋廣場・海港天際線與巨輪</h4>
+              <p class="text-[10px] text-harborNavy/60 font-bold">踏著潮濕的足跡・城市聲音記憶檔案</p>
+            </div>
+          </div>
+
+          <div class="space-y-2 mt-2">
+            <button onclick="window.takeStampSnapshot()" class="w-full py-2.5 bg-rainYellow hover:bg-yellow-400 text-deepIndigo font-black text-xs sm:text-sm rounded-xl border-2 border-harborNavy shadow-sm flex items-center justify-center gap-1.5 active:scale-98">
+              <i data-lucide="camera" class="w-4 h-4"></i>
+              <span>按下快門拍照 / 切換代表插畫</span>
+            </button>
+
+            <button onclick="window.saveStampToAlbum()" class="w-full py-3 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-harborNavy shadow-paperEdge active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="bookmark-check" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              <span>儲存至集郵冊並返回首頁</span>
+            </button>
+          </div>
+
+          <div id="stamp-sensory-panel" class="hidden mt-2.5 bg-paperBase text-harborNavy p-2.5 sm:p-3 rounded-2xl border-2 border-harborNavy/30 shadow-md">
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="w-2 h-2 rounded-full bg-brickCoral"></span>
+              <span class="text-[10px] sm:text-[11px] font-black tracking-wider text-brickCoralDark">觸覺引導・情感提示字卡</span>
+            </div>
+            <p id="stamp-sensory-text" class="text-[10px] sm:text-xs font-bold text-harborNavy/85 leading-relaxed">
+              雙手捧著剛生成的郵票，感受心靈與這座海港的連結；將這份潮濕卻溫暖的漫步記憶，珍藏於隨身行囊。
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 集郵手帳本 MODAL -->
+    <div id="modal-album" class="fixed inset-0 z-50 bg-harborNavy/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-5">
+      <div class="bg-white border-3 border-harborNavy rounded-2xl sm:rounded-3xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl flex flex-col justify-between max-h-[85vh]">
+        
+        <div class="flex items-center justify-between pb-2.5 border-b-2 border-harborNavy/15 mb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-brickCoral text-white flex items-center justify-center">
+              <i data-lucide="book-marked" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-sm sm:text-base font-black text-harborNavy">漫步基隆・集郵手帳本</h3>
+          </div>
+          <button onclick="window.closeAlbumModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-paperBase flex items-center justify-center text-harborNavy border border-harborNavy/30">
+            <i data-lucide="x" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+          </button>
+        </div>
+
+        <div class="overflow-y-auto flex-1 pr-1 my-2">
+          <p class="text-[11px] text-harborNavy/70 font-bold mb-2">已收藏的走讀郵票（共 <span id="album-count-text" class="text-brickCoral font-black">0</span> 枚）：</p>
+          <div id="album-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"></div>
+        </div>
+
+        <div class="pt-2.5 border-t-2 border-harborNavy/15 flex justify-end">
+          <button onclick="window.closeAlbumModal()" class="px-4 py-1.5 bg-keelungSea text-deepIndigo font-black text-xs rounded-xl border border-harborNavy">
+            關閉手帳
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 地點專屬歌曲 MODAL -->
+    <div id="modal-melody" class="fixed inset-0 z-50 bg-harborNavy/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-5">
+      <div class="bg-white border-3 border-harborNavy rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-6 shadow-2xl flex flex-col justify-between max-h-[85vh]">
+        
+        <div class="flex items-center justify-between pb-2.5 border-b-2 border-harborNavy/15 mb-2.5">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-rainYellow text-deepIndigo flex items-center justify-center border border-harborNavy">
+              <i data-lucide="disc-3" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="text-sm sm:text-base font-black text-harborNavy">三大地點・專屬完整歌曲</h3>
+              <p class="text-[10px] text-harborNavy/60 font-bold">收集完該地點所有子點即可解鎖完整樂章</p>
+            </div>
+          </div>
+          <button onclick="window.closeMelodyModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-paperBase flex items-center justify-center text-harborNavy border border-harborNavy/30">
+            <i data-lucide="x" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+          </button>
+        </div>
+
+        <div class="space-y-2.5 my-1.5 overflow-y-auto flex-1 pr-1 text-xs">
+          <!-- 海洋廣場 -->
+          <div id="song-card-ocean" class="p-3 rounded-xl border-2 border-harborNavy/25 bg-paperBase flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-keelungSea border border-harborNavy"></span>
+                <div>
+                  <h4 class="font-black text-harborNavy text-xs sm:text-sm">海洋廣場專屬樂章</h4>
+                  <p class="text-[10px] text-harborNavy/60 font-bold">《潮水與木琴的蔚藍協奏》・3個子點解鎖</p>
+                </div>
+              </div>
+              <span id="badge-ocean-song" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark">未解鎖 (0/3)</span>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[9px] text-harborNavy/60 font-bold">海浪五度音程、木琴空靈共鳴</span>
+              <button id="btn-play-ocean-song" onclick="window.playRegionFullSong('ocean')" disabled class="px-2.5 py-1 bg-keelungSea text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
+                <i data-lucide="play" class="w-3 h-3"></i> 播放
+              </button>
+            </div>
+          </div>
+
+          <!-- 崁仔頂 -->
+          <div id="song-card-kan" class="p-3 rounded-xl border-2 border-harborNavy/25 bg-paperBase flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-brickCoral border border-harborNavy"></span>
+                <div>
+                  <h4 class="font-black text-harborNavy text-xs sm:text-sm">崁仔頂專屬樂章</h4>
+                  <p class="text-[10px] text-harborNavy/60 font-bold">《深夜拍賣與銀光拍擊的市井晨曦曲》・6個子點解鎖</p>
+                </div>
+              </div>
+              <span id="badge-kan-song" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark">未解鎖 (0/6)</span>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[9px] text-harborNavy/60 font-bold">晶亮高音切分音、市井節奏律動</span>
+              <button id="btn-play-kan-song" onclick="window.playRegionFullSong('kan')" disabled class="px-2.5 py-1 bg-brickCoral text-white font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
+                <i data-lucide="play" class="w-3 h-3"></i> 播放
+              </button>
+            </div>
+          </div>
+
+          <!-- 委託行 (曲 4 完整合奏) -->
+          <div id="song-card-wei" class="p-3 rounded-xl border-2 border-harborNavy/25 bg-paperBase flex flex-col gap-1.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-rainYellow border border-harborNavy"></span>
+                <div>
+                  <h4 class="font-black text-harborNavy text-xs sm:text-sm">委託行專屬樂章</h4>
+                  <p class="text-[10px] text-harborNavy/60 font-bold">《洋貨留聲機與復古巷弄爵士》・3個子點解鎖</p>
+                </div>
+              </div>
+              <span id="badge-wei-song" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark">未解鎖 (0/3)</span>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[9px] text-harborNavy/60 font-bold">曲 4：Bass、打擊律動與爵士交響合奏</span>
+              <button id="btn-play-wei-song" onclick="window.playRegionFullSong('wei')" disabled class="px-2.5 py-1 bg-rainYellow text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
+                <i data-lucide="play" class="w-3 h-3"></i> 播放
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2.5 border-t-2 border-harborNavy/15 flex items-center justify-between text-xs font-bold text-harborNavy">
+          <span id="playing-song-hint" class="text-brickCoralDark font-black text-[11px]">點擊按鈕聆聽專屬歌曲</span>
+          <button onclick="window.stopAnyPlayingMusic()" class="px-2.5 py-1 bg-paperBase rounded-lg border border-harborNavy/30 text-harborNavy/80 hover:bg-gray-100 text-xs">
+            停止播放
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= JAVASCRIPT 全域安全註冊 ================= -->
+  <script>
+    (function(global) {
+      /* ================= 1. 視區動態高度計算 ================= */
+      function adjustViewportHeight() {
+        const vh = window.innerHeight;
+        document.documentElement.style.setProperty('--app-height', `${vh}px`);
+      }
+      window.addEventListener('resize', adjustViewportHeight);
+      window.addEventListener('orientationchange', () => { setTimeout(adjustViewportHeight, 150); });
+      adjustViewportHeight();
+
+      /* ================= 2. 委託行真實自訂音訊源設定 ================= */
+      const WEITUO_AUDIO_SOURCES = {
+        spot1: 'https://files.catbox.moe/qfm7ky.mp3',   // 曲 1：Bass
+        spot2: 'https://files.catbox.moe/mrmbg7.mp3',  // 曲 2：Drums
+        spot3: 'https://files.catbox.moe/6ri4yw.mp3',  // 曲 3：Other
+        fullSong: 'https://files.catbox.moe/m0foeg.m4a' // 曲 4：最終完整大合奏
+      };
+
+      /* ================= 3. 12 個子地點與歷史問答題目資料庫 ================= */
+      const SPOTS_DATA = [
+        // --- 海洋廣場 (3個子點) ---
+        {
+          id: 'spot-ocean-1',
+          region: 'ocean',
+          regionName: '海洋廣場',
+          title: '海港天際線與巨輪',
+          objectType: 'ship',
+          objectName: '靠港巨型郵輪',
+          x: 36, y: 28,
+          color: '#7fc5be',
+          sealName: '海洋廣場・巨輪鳴笛之印',
+          quiz: {
+            question: '基隆港能讓大型郵輪與貨櫃輪直接開進市中心停靠，主要得益於其哪項特殊的地理特徵？',
+            options: [
+              { text: 'A. 人工填海造陸形成的平坦海灘', correct: false },
+              { text: 'B. 深入內陸且水深充沛的天然峽灣地勢', correct: true },
+              { text: 'C. 全年平靜完全無風浪的封閉潟湖', correct: false }
+            ],
+            explanation: '正解是【B】。基隆港為典型的天然深水良港，兩側由群山環抱，航道深入市街腹地，因此各國大型客貨輪皆能直接停靠在市中心港灣。'
+          },
+          sensory: '【觸覺引導】手扶著海風微涼的防波欄杆，感受潮濕的海霧在指尖凝結成珠。【情感提示】心靈隨之寬闊，放下日常紛擾，融入大船出港的壯闊期盼。',
+          toneFreqs: [261.63, 329.63, 392.00, 523.25]
+        },
+        {
+          id: 'spot-ocean-2',
+          region: 'ocean',
+          regionName: '海洋廣場',
+          title: '潮濕木棧道與海波浪花',
+          objectType: 'waves',
+          objectName: '木棧平台與浪花',
+          x: 48, y: 35,
+          color: '#7fc5be',
+          sealName: '海洋廣場・潮水浪花之印',
+          quiz: {
+            question: '海洋廣場鋪設了廣闊的木棧平台供人漫步，它橫跨在基隆哪條具有治水歷史的河口上方？',
+            options: [
+              { text: 'A. 田寮河', correct: false },
+              { text: 'B. 旭川河', correct: true },
+              { text: 'C. 基隆河', correct: false }
+            ],
+            explanation: '正解是【B】。海洋廣場前身即為旭川河注入基隆內港之交界處，過去曾因加蓋商業大樓，現今以親水木棧平台串連海灣水岸。'
+          },
+          sensory: '【觸覺引導】踩踏在濕潤平整的木紋上，體會微涼的水分自鞋底泛起的輕微彈性。【情感提示】學會享受雨都的溫柔，感受潮氣帶來的沉靜與安心。',
+          toneFreqs: [293.66, 349.23, 440.00, 587.33]
+        },
+        {
+          id: 'spot-ocean-3',
+          region: 'ocean',
+          regionName: '海洋廣場',
+          title: '黑鳶展翅盤旋之空',
+          objectType: 'kite',
+          objectName: '黑鳶展翅盤旋',
+          x: 44, y: 20,
+          color: '#7fc5be',
+          sealName: '海洋廣場・黑鳶展翅之印',
+          quiz: {
+            question: '在海洋廣場上空常能看見成群市鳥「黑鳶」盤旋，牠們在基隆民間最常被稱為什麼？',
+            options: [
+              { text: 'A. 老鷹', correct: true },
+              { text: 'B. 海鷗', correct: false },
+              { text: 'C. 白鷺鷥', correct: false }
+            ],
+            explanation: '正解是【A】。黑鳶就是俗稱的「老鷹」，基隆是全台灣極少數能在繁華市區正上方近距離仰望野生黑鳶乘著海風氣流滑翔的城市。'
+          },
+          sensory: '【觸覺引導】仰起頭，感受自外港吹拂而來的海風在指縫間穿梭的微涼阻力。【情感提示】體會展翅高飛時居高臨下的寬廣與傲然自由。',
+          toneFreqs: [329.63, 392.00, 493.88, 659.25]
+        },
+
+        // --- 崁仔頂 (6個子點) ---
+        {
+          id: 'spot-kan-1',
+          region: 'kan',
+          regionName: '崁仔頂',
+          title: '鮮活躍動銀白海魚',
+          objectType: 'fish',
+          objectName: '鮮活跳躍銀魚',
+          x: 32, y: 62,
+          color: '#e57361',
+          sealName: '崁仔頂・鮮活銀魚之印',
+          quiz: {
+            question: '崁仔頂魚市被譽為「台版築地市場」，整條街市最熱鬧活躍的交易黃金時段通常落在何時？',
+            options: [
+              { text: 'A. 清晨 08:00 到 中午 12:00', correct: false },
+              { text: 'B. 下午 14:00 到 傍晚 18:00', correct: false },
+              { text: 'C. 深夜 23:00 到 凌晨 04:00', correct: true }
+            ],
+            explanation: '正解是【C】。崁仔頂是夜行者的天下，各港口剛打撈上岸的漁獲在半夜運抵，此時燈火通明、人聲鼎沸，是北台灣最新鮮的海味心臟。'
+          },
+          sensory: '【觸覺引導】靠近冰鮮魚箱，感受冷冽的寒氣撲面而來，空氣中帶有新鮮的海水鹽香。【情感提示】敬畏大自然與深海所孕育的豐沛生機。',
+          toneFreqs: [440.00, 554.37, 659.25, 880.00]
+        },
+        {
+          id: 'spot-kan-2',
+          region: 'kan',
+          regionName: '崁仔頂',
+          title: '深夜盛魚竹編簍',
+          objectType: 'basket',
+          objectName: '竹編盛魚簍',
+          x: 42, y: 68,
+          color: '#e57361',
+          sealName: '崁仔頂・竹編魚簍之印',
+          quiz: {
+            question: '「崁仔頂」地名的由來，與早期此處的哪種地貌歷史特徵有關？',
+            options: [
+              { text: 'A. 挑夫自旭川河碼頭石階「石崁」拾級而上抵達的坡頂', correct: true },
+              { text: 'B. 昔日煤礦開採所堆積出來的高聳山崁', correct: false },
+              { text: 'C. 專門供奉媽祖廟的紅色磚石門崁', correct: false }
+            ],
+            explanation: '正解是【A】。昔日小漁船經由旭川河將漁獲運抵河畔，工人沿著河岸石階（閩南語稱「崁仔」）挑魚走上岸邊街道販賣，因而得名「崁仔頂」。'
+          },
+          sensory: '【觸覺引導】手指觸摸竹編魚簍粗糙扎實的纖維與微濕表面。【情感提示】體會每一份新鮮食材背後，漁人與搬運者的辛勤與堅韌。',
+          toneFreqs: [493.88, 622.25, 739.99, 987.77]
+        },
+        {
+          id: 'spot-kan-3',
+          region: 'kan',
+          regionName: '崁仔頂',
+          title: '糶手傳統黃銅老磅秤',
+          objectType: 'scale',
+          objectName: '黃銅老磅秤',
+          x: 48, y: 58,
+          color: '#e57361',
+          sealName: '崁仔頂・老磅秤之印',
+          quiz: {
+            question: '在崁仔頂魚市主導拍賣、口中唸唸有詞主持喊價的靈魂人物被稱為什麼？',
+            options: [
+              { text: 'A. 水手', correct: false },
+              { text: 'B. 糶手（音同「跳」）', correct: true },
+              { text: 'C. 掌櫃', correct: false }
+            ],
+            explanation: '正解是【B】。「糶手」（Tiò-chhiú）具備極高敏銳度，以極快的拍賣速度與特殊的抑揚頓挫唱價，在數秒鐘內看懂買家眼神完成成交。'
+          },
+          sensory: '【觸覺引導】感受黃銅金屬在夜氣中的冰涼與秤砣粗實的份量感。【情感提示】體會市井交易中最真實的信譽與沉甸甸的生活重量。',
+          toneFreqs: [392.00, 493.88, 587.33, 783.99]
+        },
+        {
+          id: 'spot-kan-4',
+          region: 'kan',
+          regionName: '崁仔頂',
+          title: '飛濺碎冰與冰鏟',
+          objectType: 'ice',
+          objectName: '碎冰塊與冰鏟',
+          x: 25, y: 72,
+          color: '#e57361',
+          sealName: '崁仔頂・碎冰晶透之印',
+          quiz: {
+            question: '清晨走在崁仔頂濕滑的街道上，為何地面總是滿溢著融冰水流？',
+            options: [
+              { text: 'A. 基隆常年降雨從天花板漏水', correct: false },
+              { text: 'B. 為保持剛捕撈海魚鮮度，需大量使用碎冰鋪蓋並自然排水', correct: true },
+              { text: 'C. 市集固定於半夜進行全街水柱沖洗消毒', correct: false }
+            ],
+            explanation: '正解是【B】。大量碎冰是用來鎖住海魚鮮甜的靈魂，冰塊融化形成的清冽流水混合著海味，正是崁仔頂獨一無二的在地觸感與氣息。'
+          },
+          sensory: '【觸覺引導】指尖輕點飛濺的小冰晶，體會冰涼刺骨卻令人精神一振的觸感。【情感提示】感受市井在深夜低溫中燃燒的火熱生機。',
+          toneFreqs: [349.23, 440.00, 523.25, 698.46]
+        },
+        {
+          id: 'spot-kan-5',
+          region: 'kan',
+          regionName: '崁仔頂',
+          title: '糶手號碼牌與叫賣鈴',
+          objectType: 'bell',
+          objectName: '糶手拍賣銅牌',
+          x: 35, y: 80,
+          color: '#e57361',
+          sealName: '崁仔頂・糶手銅鈴之印',
+          quiz: {
+            question: '糶手喊價時節奏極快，買家若想得標出價，通常會透過何種方式向糶手示意？',
+            options: [
+              { text: 'A. 揮舞自備的手電筒', correct: false },
+              { text: 'B. 眼神對視、微妙手指比劃或特定手勢', correct: true },
+              { text: 'C. 敲擊鐵盆發出巨大聲響', correct: false }
+            ],
+            explanation: '正解是【B】。魚市買賣充滿內行人的默契，老買家只需眨眼、伸出一根指頭或微微點頭，經驗老到的糶手就能瞬間鎖定得標者。'
+          },
+          sensory: '【觸覺引導】手心握住金屬拍賣號碼牌的硬挺邊緣。【情感提示】被市井底層最純粹、最拼搏的生命力所深深撼動。',
+          toneFreqs: [523.25, 659.25, 783.99, 1046.50]
+        },
+        {
+          id: 'spot-kan-6',
+          region: 'kan',
+          regionName: '崁仔頂',
+          title: '夜雨吊掛黃銅老燈泡',
+          objectType: 'lamp',
+          objectName: '吊掛鎢絲老燈泡',
+          x: 54, y: 74,
+          color: '#e57361',
+          sealName: '崁仔頂・暖黃街燈之印',
+          quiz: {
+            question: '崁仔頂攤位上方常垂掛一顆顆暖黃色的高功率燈泡，其主要功能除了照明外還能達到什麼效果？',
+            options: [
+              { text: 'A. 聚光映照讓魚鱗更顯鮮亮光澤，並提供些微暖意驅散深夜寒氣', correct: true },
+              { text: 'B. 專門吸引飛蛾與海鳥聚集', correct: false },
+              { text: 'C. 向遠方航行船隻發送摩斯密碼訊號', correct: false }
+            ],
+            explanation: '正解是【A】。昏黃的鎢絲燈光能完美折射海魚剛出水時的晶瑩鱗光，讓買家精準辨別魚質，也點亮了雨都午夜最溫潤的人情視野。'
+          },
+          sensory: '【觸覺引導】冰涼的微雨落在臉頰，而眼眸迎向溫暖的黃光。【情感提示】在漆黑深夜中，感受到被這座城市默默接納的安全與溫暖。',
+          toneFreqs: [329.63, 415.30, 493.88, 659.25]
+        },
+
+        // --- 委託行 (3個分點：分別綁定曲 1、曲 2、曲 3) ---
+        {
+          id: 'spot-wei-1',
+          region: 'wei',
+          regionName: '委託行',
+          title: '復古皮革旅行皮箱',
+          objectType: 'suitcase',
+          objectName: '復古皮革旅行箱',
+          x: 68, y: 46,
+          color: '#f5c84c',
+          audioTrackUrl: WEITUO_AUDIO_SOURCES.spot1,
+          sealName: '委託行・洋貨皮箱之印',
+          quiz: {
+            question: '在過去出國管制嚴格的年代，委託行街區為何能匯集全台最齊全的進口舶來品？',
+            options: [
+              { text: 'A. 當地居民自己開工廠仿造外國商品', correct: false },
+              { text: 'B. 往返大洋的遠洋船員與隨艦美軍合法或委託帶入海外高檔物資', correct: true },
+              { text: 'C. 專供外國使節私下交換禮物的特許市場', correct: false }
+            ],
+            explanation: '正解是【B】。基隆港作為國際樞紐，遠洋海員將歐美日流行之洋煙、洋酒、皮衣及名錶交由委託行代售，讓此地成為當時全台最摩登的時尚櫥窗。'
+          },
+          sensory: '【觸覺引導】指尖輕劃過老皮箱斑駁深邃的皮革紋理與黃銅金屬鎖扣。【情感提示】重溫那個充滿海外幻想與浪漫冒險氣息的優雅時代。',
+          toneFreqs: [523.25, 659.25, 783.99, 1046.50]
+        },
+        {
+          id: 'spot-wei-2',
+          region: 'wei',
+          regionName: '委託行',
+          title: '時光黑膠唱片機',
+          objectType: 'gramophone',
+          objectName: '黑膠唱片機',
+          x: 76, y: 55,
+          color: '#f5c84c',
+          audioTrackUrl: WEITUO_AUDIO_SOURCES.spot2,
+          sealName: '委託行・時光黑膠之印',
+          quiz: {
+            question: '越戰時期美軍駐紮與度假艦隊停靠基隆，帶動了委託行周遭哪種西方娛樂文化的大幅盛行？',
+            options: [
+              { text: 'A. 歌仔戲班與布袋戲野台', correct: false },
+              { text: 'B. 美式鄉村音樂、爵士黑膠唱片與西洋酒吧', correct: true },
+              { text: 'C. 傳統京劇與曲藝茶館', correct: false }
+            ],
+            explanation: '正解是【B】。美軍水手帶入最新流行的搖滾與爵士黑膠唱片，使委託行街區瀰漫著異國音樂氛圍，也深刻影響了台灣早期流行音樂的養分。'
+          },
+          sensory: '【觸覺引導】指腹沿著黑膠唱片細緻的同心圓溝槽滑過，感受微小起伏。【情感提示】在時光沉積的音色中，尋回遺失已久的內心寧靜與浪漫。',
+          toneFreqs: [261.63, 392.00, 523.25, 659.25]
+        },
+        {
+          id: 'spot-wei-3',
+          region: 'wei',
+          regionName: '委託行',
+          title: '舶來香水與洋酒琉璃瓶',
+          objectType: 'perfume',
+          objectName: '香水與洋酒瓶',
+          x: 82, y: 40,
+          color: '#f5c84c',
+          audioTrackUrl: WEITUO_AUDIO_SOURCES.spot3,
+          sealName: '委託行・舶來琉璃之印',
+          quiz: {
+            question: '隨著台灣解嚴開放國人出國觀光後，委託行街區如今正經歷什麼樣的文化轉身？',
+            options: [
+              { text: 'A. 保留老街石板特色，轉型為結合在地文創、手沖咖啡與歷史導讀的青年創生基地', correct: true },
+              { text: 'B. 全數拆除改建為無人貨櫃自動倉儲', correct: false },
+              { text: 'C. 變成大型連鎖超級市場聚集區', correct: false }
+            ],
+            explanation: '正解是【A】。委託行雖褪去昔日舶來品獨佔的光環，但隱密巷弄風情吸引眾多青年返鄉，以文創小店、獨立咖啡店讓這段華麗歲月重新呼吸。'
+          },
+          sensory: '【觸覺引導】觸摸厚實玻璃瓶身細膩的切割稜角與微涼瓶壁。【情感提示】新舊記憶在巷弄中交織，品味世代留存的摩登餘韻。',
+          toneFreqs: [196.00, 246.94, 293.66, 392.00]
+        }
+      ];
+
+      const REGION_SONG_DEFINITIONS = {
+        ocean: {
+          name: '海洋廣場專屬樂章',
+          fullTitle: '《潮水與木琴的蔚藍協奏》',
+          totalSpots: 3,
+          color: '#7fc5be',
+          melodyChords: [
+            [261.63, 329.63, 392.00],
+            [293.66, 349.23, 440.00],
+            [329.63, 392.00, 493.88],
+            [261.63, 392.00, 523.25]
+          ]
+        },
+        kan: {
+          name: '崁仔頂專屬樂章',
+          fullTitle: '《深夜拍賣與銀光拍擊的市井晨曦曲》',
+          totalSpots: 6,
+          color: '#e57361',
+          melodyChords: [
+            [440.00, 554.37, 659.25],
+            [493.88, 622.25, 739.99],
+            [392.00, 493.88, 587.33],
+            [349.23, 440.00, 523.25],
+            [523.25, 659.25, 783.99],
+            [440.00, 659.25, 880.00]
+          ]
+        },
+        wei: {
+          name: '委託行專屬樂章',
+          fullTitle: '《洋貨留聲機與復古巷弄爵士》',
+          totalSpots: 3,
+          color: '#f5c84c',
+          melodyChords: [
+            [196.00, 246.94, 293.66],
+            [220.00, 277.18, 329.63],
+            [261.63, 329.63, 392.00],
+            [196.00, 293.66, 392.00]
+          ]
+        }
+      };
+
+      /* ================= 4. 專屬手繪圖示生成器 ================= */
+      function getKeelungSpotSVG(type, size = 56) {
+        const s = size === 56 ? 'w-11 h-11 sm:w-13 sm:h-13' : 'w-7 h-7 sm:w-8 sm:h-8';
+        switch (type) {
+          case 'ship':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <path d="M12 66 L88 66 L78 86 L22 86 Z" fill="#ffffff" stroke="#233748" stroke-width="3"/>
+              <rect x="28" y="44" width="44" height="22" rx="3" fill="#7fc5be" stroke="#233748" stroke-width="2.5"/>
+              <rect x="44" y="30" width="12" height="14" fill="#e57361" stroke="#233748" stroke-width="2"/>
+              <circle cx="38" cy="55" r="3" fill="#f5c84c"/><circle cx="50" cy="55" r="3" fill="#f5c84c"/><circle cx="62" cy="55" r="3" fill="#f5c84c"/>
+            </svg>`;
+          case 'waves':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="15" y="24" width="70" height="20" rx="3" fill="#f6f1e7" stroke="#233748" stroke-width="2.5"/>
+              <path d="M10 60 Q30 45 50 60 T90 60" stroke="#7fc5be" stroke-width="3.5" fill="none"/>
+              <path d="M15 76 Q35 62 55 76 T95 76" stroke="#233748" stroke-width="3" fill="none"/>
+            </svg>`;
+          case 'kite':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <path d="M10 50 Q45 20 50 45 Q55 20 90 50 Q65 48 50 72 Q35 48 10 50 Z" fill="#233748" stroke="#ffffff" stroke-width="2"/>
+              <circle cx="50" cy="48" r="3.5" fill="#f5c84c"/>
+            </svg>`;
+          case 'fish':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <ellipse cx="50" cy="50" rx="32" ry="16" fill="#dce8f0" stroke="#233748" stroke-width="3"/>
+              <polygon points="18,50 5,34 5,66" fill="#7fc5be" stroke="#233748" stroke-width="2.5"/>
+              <circle cx="70" cy="46" r="3.5" fill="#233748"/>
+            </svg>`;
+          case 'basket':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <polygon points="25,45 75,45 68,78 32,78" fill="#e57361" stroke="#233748" stroke-width="3"/>
+              <line x1="30" y1="56" x2="70" y2="56" stroke="#ffffff" stroke-width="2.5"/>
+            </svg>`;
+          case 'scale':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <line x1="50" y1="20" x2="50" y2="78" stroke="#233748" stroke-width="3"/>
+              <line x1="22" y1="36" x2="78" y2="36" stroke="#233748" stroke-width="3"/>
+              <path d="M12 56 Q22 66 32 56 Z" fill="#f5c84c" stroke="#233748" stroke-width="2"/>
+              <path d="M68 56 Q78 66 88 56 Z" fill="#f5c84c" stroke="#233748" stroke-width="2"/>
+            </svg>`;
+          case 'ice':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="20" y="48" width="24" height="24" rx="4" fill="#dce8f0" stroke="#233748" stroke-width="2.5" transform="rotate(15 20 48)"/>
+              <rect x="52" y="42" width="26" height="26" rx="4" fill="#ffffff" stroke="#233748" stroke-width="2.5" transform="rotate(-12 52 42)"/>
+            </svg>`;
+          case 'bell':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <path d="M30 65 C30 40 40 25 50 25 C60 25 70 40 70 65 Z" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+              <circle cx="50" cy="78" r="5" fill="#233748"/>
+            </svg>`;
+          case 'lamp':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <line x1="50" y1="10" x2="50" y2="42" stroke="#233748" stroke-width="3"/>
+              <circle cx="50" cy="62" r="20" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+            </svg>`;
+          case 'suitcase':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="20" y="35" width="60" height="42" rx="6" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+              <rect x="42" y="24" width="16" height="11" rx="3" fill="none" stroke="#233748" stroke-width="3"/>
+            </svg>`;
+          case 'gramophone':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="52" r="28" fill="#233748" stroke="#233748" stroke-width="2"/>
+              <circle cx="50" cy="52" r="14" fill="#f5c84c"/>
+              <circle cx="50" cy="52" r="4" fill="#e57361"/>
+            </svg>`;
+          case 'perfume':
+          default:
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="35" y="44" width="30" height="38" rx="6" fill="#7fc5be" stroke="#233748" stroke-width="3"/>
+              <circle cx="50" cy="24" r="7" fill="#e57361" stroke="#233748" stroke-width="2.5"/>
+            </svg>`;
+        }
+      }
+
+      /* ================= 5. 全局狀態 ================= */
+      let currentMode = 'look';
+      let currentSpot = null;
+      let completedSpots = new Set();
+      let stampAlbum = [];
+      let activeCameraStream = null;
+      let audioCtx = null;
+      let speechSynth = window.speechSynthesis;
+      let activeUtterance = null;
+      let activeAudioTimers = [];
+      let currentActiveAudioElement = null;
+
+      function loadProgressFromStorage() {
+        const savedSpots = localStorage.getItem('keelung_completed_spots');
+        if (savedSpots) {
+          try { completedSpots = new Set(JSON.parse(savedSpots)); } catch (e) { completedSpots = new Set(); }
+        }
+        const savedStamps = localStorage.getItem('keelung_stamps');
+        if (savedStamps) {
+          try { stampAlbum = JSON.parse(savedStamps); } catch (e) { stampAlbum = []; }
+        }
+      }
+
+      function saveCompletedSpotsToStorage() {
+        localStorage.setItem('keelung_completed_spots', JSON.stringify([...completedSpots]));
+      }
+
+      function isRegionFullyCompleted(regionKey) {
+        const regionSpots = SPOTS_DATA.filter(s => s.region === regionKey);
+        return regionSpots.every(s => completedSpots.has(s.id));
+      }
+
+      function getRegionCompletedCount(regionKey) {
+        const regionSpots = SPOTS_DATA.filter(s => s.region === regionKey);
+        return regionSpots.filter(s => completedSpots.has(s.id)).length;
+      }
+
+      function getUnlockedSongsCount() {
+        let count = 0;
+        if (isRegionFullyCompleted('ocean')) count++;
+        if (isRegionFullyCompleted('kan')) count++;
+        if (isRegionFullyCompleted('wei')) count++;
+        return count;
+      }
+
+      /* ================= 6. 視圖導航與模式切換 ================= */
+      function navigateTo(viewId) {
+        document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+        const target = document.getElementById(`view-${viewId}`);
+        if (target) {
+          target.classList.remove('hidden');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        if (viewId !== 'ar' && viewId !== 'stamp') {
+          stopCameraFeed();
+        }
+        if (speechSynth && speechSynth.speaking) {
+          speechSynth.cancel();
+        }
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function startMode(mode) {
+        currentMode = mode;
+        const labelEl = document.getElementById('map-mode-label');
+        if (labelEl) {
+          if (mode === 'look') {
+            labelEl.textContent = '看見基隆';
+          } else if (mode === 'feel') {
+            labelEl.textContent = '感受基隆（觸覺引導）';
+          } else if (mode === 'understand') {
+            labelEl.textContent = '讀懂基隆（歷史問答）';
+          }
+        }
+        renderMapPins();
+        updateProgressUI();
+        navigateTo('map');
+      }
+
+      /* ================= 7. 地圖點位渲染 ================= */
+      function renderMapPins(filter = 'all') {
+        const container = document.getElementById('map-pins-layer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        SPOTS_DATA.forEach((spot, idx) => {
+          if (filter !== 'all' && spot.region !== filter) return;
+
+          const isDone = completedSpots.has(spot.id);
+          const pin = document.createElement('div');
+          pin.className = 'absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 group transition-all duration-300';
+          pin.style.left = `${spot.x}%`;
+          pin.style.top = `${spot.y}%`;
+
+          pin.innerHTML = `
+            <div class="relative flex flex-col items-center">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl border-2 border-harborNavy flex items-center justify-center shadow-paperBtn transition-transform group-hover:scale-125 ${isDone ? 'ring-2 ring-emerald-500 bg-white' : 'animate-bounce'}" style="background-color: ${isDone ? '#ffffff' : spot.color}; animation-duration: ${2.6 + (idx % 3) * 0.4}s;">
+                ${getKeelungSpotSVG(spot.objectType, 30)}
+              </div>
+              <div class="mt-1 px-2 py-0.5 bg-white/95 border border-harborNavy/30 rounded-md text-[9px] sm:text-[10px] font-black text-harborNavy shadow-sm whitespace-nowrap pointer-events-none group-hover:bg-rainYellow transition-colors flex items-center gap-1">
+                <span>${spot.title}</span>
+                ${isDone ? '<span class="text-emerald-600">✓</span>' : ''}
+              </div>
+            </div>
+          `;
+
+          pin.onclick = () => onSpotSelected(spot);
+          container.appendChild(pin);
+        });
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function filterAreaSpots(area) {
+        document.querySelectorAll('.map-filter-btn').forEach(b => {
+          b.classList.remove('bg-white', 'active');
+          b.classList.add('bg-white/85');
+        });
+        const activeBtn = document.getElementById(`tab-filter-${area}`);
+        if (activeBtn) {
+          activeBtn.classList.remove('bg-white/85');
+          activeBtn.classList.add('bg-white', 'active');
+        }
+        renderMapPins(area);
+      }
+
+      function onSpotSelected(spot) {
+        currentSpot = spot;
+        if (currentMode === 'understand') {
+          setupQuizView(spot);
+          navigateTo('story');
+        } else {
+          setupARView(spot);
+          navigateTo('ar');
+        }
+      }
+
+      /* ================= 8. 讀懂基隆：歷史問答 ================= */
+      function setupQuizView(spot) {
+        document.getElementById('quiz-spot-tag').textContent = `${spot.regionName}・${spot.title}`;
+        document.getElementById('quiz-question-title').textContent = spot.quiz.question;
+
+        const banner = document.getElementById('story-art-banner');
+        banner.innerHTML = `
+          <div class="relative w-full h-full flex items-center justify-center bg-[#eae2d3]">
+            <svg class="w-full h-full" viewBox="0 0 500 200" fill="none">
+              <rect width="500" height="200" fill="#f6f1e7"/>
+              <path d="M0,170 Q150,110 300,150 T500,120 L500,200 L0,200 Z" fill="${spot.color}" opacity="0.5"/>
+              <circle cx="120" cy="70" r="35" fill="#f5c84c" opacity="0.8"/>
+            </svg>
+            <div class="absolute p-2.5 bg-white/95 rounded-2xl border-2 border-harborNavy shadow-md animate-bounce">
+              ${getKeelungSpotSVG(spot.objectType, 48)}
+            </div>
+          </div>
+        `;
+
+        const optionsContainer = document.getElementById('quiz-options-container');
+        optionsContainer.innerHTML = '';
+
+        const explanationBox = document.getElementById('quiz-explanation-box');
+        explanationBox.classList.add('hidden');
+
+        const proceedBtn = document.getElementById('btn-proceed-to-ar');
+        proceedBtn.setAttribute('disabled', 'true');
+
+        spot.quiz.options.forEach((opt) => {
+          const btn = document.createElement('button');
+          btn.className = 'quiz-opt-btn w-full text-left p-3 rounded-xl border-2 border-harborNavy/25 bg-paperBase hover:bg-white text-xs sm:text-sm font-bold text-harborNavy transition-all flex items-center justify-between shadow-sm';
+          btn.innerHTML = `<span>${opt.text}</span><i data-lucide="circle" class="w-4 h-4 text-harborNavy/40"></i>`;
+          
+          btn.onclick = () => onSelectQuizOption(opt, btn, spot);
+          optionsContainer.appendChild(btn);
+        });
+
+        document.getElementById('voice-quiz-btn-text').textContent = '語音解說朗讀';
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function onSelectQuizOption(selectedOption, clickedBtn, spot) {
+        document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+          btn.classList.add('pointer-events-none', 'opacity-60');
+        });
+        clickedBtn.classList.remove('opacity-60');
+
+        const statusPill = document.getElementById('quiz-status-pill');
+        const explanationBox = document.getElementById('quiz-explanation-box');
+        const explanationText = document.getElementById('quiz-explanation-text');
+        const proceedBtn = document.getElementById('btn-proceed-to-ar');
+
+        if (selectedOption.correct) {
+          clickedBtn.classList.add('bg-emerald-100', 'border-emerald-600', 'text-emerald-900');
+          statusPill.textContent = '恭喜答對！獲得印記靈感';
+          statusPill.className = 'text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-500 text-white';
+        } else {
+          clickedBtn.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+          statusPill.textContent = '雖然答錯了，但來看看典故吧！';
+          statusPill.className = 'text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-500 text-white';
+        }
+
+        explanationText.textContent = spot.quiz.explanation;
+        explanationBox.classList.remove('hidden');
+
+        proceedBtn.removeAttribute('disabled');
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function toggleQuizSpeech() {
+        if (!window.speechSynthesis) {
+          showFloatingToast('您的瀏覽器不支援語音朗讀功能');
+          return;
+        }
+        if (speechSynth.speaking) {
+          speechSynth.cancel();
+          document.getElementById('voice-quiz-btn-text').textContent = '語音解說朗讀';
+          return;
+        }
+        if (currentSpot) {
+          const textToRead = `${currentSpot.regionName}，${currentSpot.title}。${currentSpot.quiz.explanation}`;
+          activeUtterance = new SpeechSynthesisUtterance(textToRead);
+          activeUtterance.lang = 'zh-TW';
+          activeUtterance.rate = 0.95;
+
+          activeUtterance.onstart = () => {
+            document.getElementById('voice-quiz-btn-text').textContent = '朗讀中 (點擊停止)';
+          };
+          activeUtterance.onend = () => {
+            document.getElementById('voice-quiz-btn-text').textContent = '重新聆聽語音';
+          };
+          speechSynth.speak(activeUtterance);
+        }
+      }
+
+      function proceedToARFromQuiz() {
+        if (speechSynth.speaking) speechSynth.cancel();
+        setupARView(currentSpot);
+        navigateTo('ar');
+      }
+
+      /* ================= 9. AR 取景與掃描 ================= */
+      function setupARView(spot) {
+        const sensoryPanel = document.getElementById('ar-sensory-panel');
+        const sensoryText = document.getElementById('ar-sensory-text');
+
+        if (currentMode === 'feel' || currentMode === 'understand') {
+          sensoryPanel.classList.remove('hidden');
+          sensoryText.textContent = spot.sensory;
+        } else {
+          sensoryPanel.classList.add('hidden');
+        }
+
+        const iconBox = document.getElementById('ar-target-icon-box');
+        iconBox.innerHTML = getKeelungSpotSVG(spot.objectType, 56);
+        document.getElementById('ar-target-name-badge').textContent = `感應到：${spot.objectName}！點擊採集`;
+
+        startCameraFeed('ar-video-feed', 'ar-fallback-art');
+      }
+
+      function startCameraFeed(videoElementId, fallbackId) {
+        const video = document.getElementById(videoElementId);
+        const fallback = document.getElementById(fallbackId);
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment' }
+          })
+          .then(stream => {
+            activeCameraStream = stream;
+            video.srcObject = stream;
+            video.classList.remove('hidden');
+            if (fallback) fallback.classList.add('opacity-10');
+          })
+          .catch(err => {
+            video.classList.add('hidden');
+            if (fallback) fallback.classList.remove('opacity-10');
+          });
+        }
+      }
+
+      function stopCameraFeed() {
+        if (activeCameraStream) {
+          activeCameraStream.getTracks().forEach(track => track.stop());
+          activeCameraStream = null;
+        }
+      }
+
+      function completeARScan() {
+        stopCameraFeed();
+
+        const wasFullyDoneBefore = isRegionFullyCompleted(currentSpot.region);
+        completedSpots.add(currentSpot.id);
+        saveCompletedSpotsToStorage();
+        updateProgressUI();
+
+        playSingleSpotAudio();
+
+        const regDef = REGION_SONG_DEFINITIONS[currentSpot.region];
+        const doneCount = getRegionCompletedCount(currentSpot.region);
+        const totalCount = regDef.totalSpots;
+
+        document.getElementById('reward-spot-title').textContent = `${currentSpot.regionName}・${currentSpot.title}`;
+        document.getElementById('reward-melody-name').textContent = `${currentSpot.title} 專屬樂曲`;
+        document.getElementById('region-progress-name').textContent = `${currentSpot.regionName} 進度`;
+        document.getElementById('region-progress-count').textContent = `${doneCount} / ${totalCount} 子地點`;
+        document.getElementById('region-progress-bar').style.width = `${Math.round((doneCount / totalCount) * 100)}%`;
+
+        const rewardIconContainer = document.getElementById('reward-icon-container');
+        rewardIconContainer.innerHTML = `
+          ${getKeelungSpotSVG(currentSpot.objectType, 56)}
+          <span class="absolute -top-1 -right-1 w-6 h-6 bg-rainYellow text-deepIndigo font-black text-xs rounded-full border border-harborNavy flex items-center justify-center">♪</span>
+        `;
+
+        const fullSongBox = document.getElementById('full-region-song-box');
+        if (!wasFullyDoneBefore && isRegionFullyCompleted(currentSpot.region)) {
+          fullSongBox.classList.remove('hidden');
+          document.getElementById('full-region-song-title').textContent = `${regDef.name}：${regDef.fullTitle}`;
+          showFloatingToast(`🎊 太棒了！已集齊${currentSpot.regionName}所有子地點！解鎖曲 4 完整歌曲！`);
+        } else if (isRegionFullyCompleted(currentSpot.region)) {
+          fullSongBox.classList.remove('hidden');
+          document.getElementById('full-region-song-title').textContent = `${regDef.name}：${regDef.fullTitle}`;
+        } else {
+          fullSongBox.classList.add('hidden');
+        }
+
+        navigateTo('reward');
+      }
+
+      function closeARScan() {
+        stopCameraFeed();
+        navigateTo('map');
+      }
+
+      /* ================= 10. 音樂播放邏輯 ================= */
+      function initAudioContext() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function stopAnyPlayingMusic() {
+        if (currentActiveAudioElement) {
+          currentActiveAudioElement.pause();
+          currentActiveAudioElement.currentTime = 0;
+          currentActiveAudioElement = null;
+        }
+        activeAudioTimers.forEach(t => clearTimeout(t));
+        activeAudioTimers = [];
+        const hint = document.getElementById('playing-song-hint');
+        if (hint) hint.textContent = '已停止音樂播放';
+      }
+
+      function playSingleSpotAudio() {
+        if (!currentSpot) return;
+        stopAnyPlayingMusic();
+
+        if (currentSpot.region === 'wei' && currentSpot.audioTrackUrl) {
+          const audio = new Audio(currentSpot.audioTrackUrl);
+          currentActiveAudioElement = audio;
+          audio.play().catch(e => {
+            initAudioContext();
+            renderSpotWebAudio(currentSpot);
+          });
+          return;
+        }
+
+        initAudioContext();
+        renderSpotWebAudio(currentSpot);
+      }
+
+      function renderSpotWebAudio(spot) {
+        const freqs = spot.toneFreqs || [261.63, 329.63, 392.00];
+        freqs.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          if (spot.region === 'wei') {
+            osc.type = (idx === 0) ? 'triangle' : 'sine';
+          } else {
+            osc.type = (idx % 2 === 0) ? 'sine' : 'triangle';
+          }
+
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.22);
+          gain.gain.setValueAtTime(0.001, audioCtx.currentTime + idx * 0.22);
+          gain.gain.exponentialRampToValueAtTime(0.22, audioCtx.currentTime + idx * 0.22 + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.22 + 0.85);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(audioCtx.currentTime + idx * 0.22);
+          osc.stop(audioCtx.currentTime + idx * 0.22 + 0.9);
+        });
+      }
+
+      function playCurrentRegionFullSong() {
+        if (!currentSpot) return;
+        playRegionFullSong(currentSpot.region);
+      }
+
+      function playRegionFullSong(regionKey) {
+        if (!isRegionFullyCompleted(regionKey)) {
+          showFloatingToast('尚未完成該地點所有子地點的 AR 掃描！');
+          return;
+        }
+
+        stopAnyPlayingMusic();
+
+        const songInfo = REGION_SONG_DEFINITIONS[regionKey];
+        const hint = document.getElementById('playing-song-hint');
+        if (hint) hint.textContent = `正在演奏：${songInfo.fullTitle} 🎶`;
+        showFloatingToast(`正在演奏：${songInfo.fullTitle}`);
+
+        if (regionKey === 'wei' && WEITUO_AUDIO_SOURCES.fullSong) {
+          const audio = new Audio(WEITUO_AUDIO_SOURCES.fullSong);
+          currentActiveAudioElement = audio;
+          audio.play().catch(e => {
+            initAudioContext();
+            renderSynthesizedRegionSong(regionKey, songInfo, hint);
+          });
+          return;
+        }
+
+        initAudioContext();
+        renderSynthesizedRegionSong(regionKey, songInfo, hint);
+      }
+
+      function renderSynthesizedRegionSong(regionKey, songInfo, hint) {
+        const chords = songInfo.melodyChords;
+        const stepDuration = 0.85;
+
+        chords.forEach((chord, step) => {
+          const timer = setTimeout(() => {
+            chord.forEach(f => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+
+              if (regionKey === 'ocean') {
+                osc.type = 'sine';
+              } else if (regionKey === 'kan') {
+                osc.type = (step % 2 === 0) ? 'triangle' : 'sine';
+              } else {
+                osc.type = (step % 2 === 0) ? 'triangle' : 'sawtooth';
+              }
+
+              osc.frequency.setValueAtTime(f, audioCtx.currentTime);
+              gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+              gain.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 0.12);
+              gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + stepDuration + 0.25);
+
+              if (regionKey === 'wei') {
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 1600;
+                osc.connect(filter);
+                filter.connect(gain);
+              } else {
+                osc.connect(gain);
+              }
+
+              gain.connect(audioCtx.destination);
+              osc.start(audioCtx.currentTime);
+              osc.stop(audioCtx.currentTime + stepDuration + 0.3);
+            });
+          }, step * stepDuration * 1000);
+
+          activeAudioTimers.push(timer);
+        });
+
+        const endTimer = setTimeout(() => {
+          if (hint) hint.textContent = '曲目演奏完畢';
+        }, (chords.length * stepDuration + 0.5) * 1000);
+        activeAudioTimers.push(endTimer);
+      }
+
+      /* ================= 11. 拍照集郵與郵戳 ================= */
+      function goToStampMaker() {
+        navigateTo('stamp');
+
+        if (currentSpot) {
+          document.getElementById('stamp-title-display').textContent = `${currentSpot.regionName}・${currentSpot.title}`;
+          document.getElementById('stamp-seal-name').textContent = currentSpot.sealName;
+        }
+
+        const stampSensoryPanel = document.getElementById('stamp-sensory-panel');
+        const stampSensoryText = document.getElementById('stamp-sensory-text');
+
+        if (currentMode === 'feel' || currentMode === 'understand') {
+          stampSensoryPanel.classList.remove('hidden');
+          stampSensoryText.textContent = currentSpot ? currentSpot.sensory : '雙手捧著剛生成的郵票，感受心靈與這座海港的連結。';
+        } else {
+          stampSensoryPanel.classList.add('hidden');
+        }
+
+        startCameraFeed('stamp-camera-video', null);
+        drawArtisticStampCanvas();
+      }
+
+      function drawArtisticStampCanvas(capturedImage = null) {
+        const canvas = document.getElementById('stamp-capture-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = 400;
+        canvas.height = 300;
+
+        if (capturedImage) {
+          ctx.drawImage(capturedImage, 0, 0, canvas.width, canvas.height);
+        } else {
+          const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+          if (currentSpot && currentSpot.region === 'kan') {
+            gradient.addColorStop(0, '#f6f1e7');
+            gradient.addColorStop(0.6, '#e57361');
+            gradient.addColorStop(1, '#233748');
+          } else if (currentSpot && currentSpot.region === 'wei') {
+            gradient.addColorStop(0, '#f5c84c');
+            gradient.addColorStop(0.7, '#f6f1e7');
+            gradient.addColorStop(1, '#cdbed8');
+          } else {
+            gradient.addColorStop(0, '#c2e7e3');
+            gradient.addColorStop(0.55, '#f6f1e7');
+            gradient.addColorStop(1, '#7fc5be');
+          }
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = '#f5c84c';
+          ctx.beginPath();
+          ctx.arc(100, 80, 26, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.strokeStyle = '#233748';
+          ctx.lineWidth = 3;
+
+          if (currentSpot && currentSpot.region === 'kan') {
+            ctx.beginPath();
+            ctx.ellipse(200, 160, 48, 22, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+          } else if (currentSpot && currentSpot.region === 'wei') {
+            ctx.beginPath();
+            ctx.roundRect(140, 120, 120, 75, 10);
+            ctx.fill();
+            ctx.stroke();
+          } else {
+            ctx.beginPath();
+            ctx.moveTo(140, 170);
+            ctx.lineTo(260, 170);
+            ctx.lineTo(240, 205);
+            ctx.lineTo(160, 205);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+          }
+
+          ctx.font = 'bold 13px "Shippori Antique B1", sans-serif';
+          ctx.fillStyle = '#233748';
+          ctx.fillText('KEELUNG ARCHIVE', 135, 270);
+        }
+      }
+
+      function takeStampSnapshot() {
+        const video = document.getElementById('stamp-camera-video');
+        const canvas = document.getElementById('stamp-capture-canvas');
+        const ctx = canvas.getContext('2d');
+
+        if (video && !video.classList.contains('hidden') && video.readyState >= 2) {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          showFloatingToast('相片已成功印入郵票！');
+        } else {
+          drawArtisticStampCanvas();
+          showFloatingToast('已切換專屬手繪紀念印記！');
+        }
+      }
+
+      function saveStampToAlbum() {
+        const canvas = document.getElementById('stamp-capture-canvas');
+        const stampDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+        const stampItem = {
+          id: 'stamp-' + Date.now(),
+          title: currentSpot ? `${currentSpot.regionName}・${currentSpot.title}` : '基隆漫步印記',
+          regionName: currentSpot ? currentSpot.regionName : '海洋廣場',
+          date: '2026.10.15',
+          image: stampDataUrl
+        };
+
+        stampAlbum.push(stampItem);
+        localStorage.setItem('keelung_stamps', JSON.stringify(stampAlbum));
+
+        updateProgressUI();
+        showFloatingToast('郵票已收入集郵手帳本！');
+        navigateTo('home');
+      }
+
+      function openAlbumModal() {
+        const grid = document.getElementById('album-grid');
+        const countEl = document.getElementById('album-count-text');
+        grid.innerHTML = '';
+        countEl.textContent = stampAlbum.length;
+
+        if (stampAlbum.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full py-10 text-center text-harborNavy/60 font-bold text-xs">
+              手帳本裡還是空的喔！前往地圖展開 AR 掃描並製作第一張郵票吧。
+            </div>
+          `;
+        } else {
+          stampAlbum.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'stamp-container p-2 flex flex-col items-center bg-white shadow-sm';
+            card.innerHTML = `
+              <div class="stamp-perforations"></div>
+              <div class="w-full aspect-[4/3] rounded-lg overflow-hidden border border-harborNavy/30 mb-1">
+                <img src="${item.image}" class="w-full h-full object-cover"/>
+              </div>
+              <p class="text-[10px] font-black text-harborNavy truncate w-full text-center">${item.title}</p>
+              <span class="text-[8px] text-brickCoralDark font-bold">${item.date}</span>
+            `;
+            grid.appendChild(card);
+          });
+        }
+
+        document.getElementById('modal-album').classList.remove('hidden');
+      }
+
+      function closeAlbumModal() {
+        document.getElementById('modal-album').classList.add('hidden');
+      }
+
+      function openMelodyModal() {
+        updateMelodyModalBadges();
+        document.getElementById('modal-melody').classList.remove('hidden');
+      }
+
+      function closeMelodyModal() {
+        document.getElementById('modal-melody').classList.add('hidden');
+      }
+
+      function updateMelodyModalBadges() {
+        const oceanDone = isRegionFullyCompleted('ocean');
+        const oceanCount = getRegionCompletedCount('ocean');
+        const oceanBadge = document.getElementById('badge-ocean-song');
+        const oceanBtn = document.getElementById('btn-play-ocean-song');
+        if (oceanBadge && oceanBtn) {
+          if (oceanDone) {
+            oceanBadge.textContent = '✓ 已解鎖 (3/3)';
+            oceanBadge.className = 'text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-400';
+            oceanBtn.removeAttribute('disabled');
+          } else {
+            oceanBadge.textContent = `未解鎖 (${oceanCount}/3)`;
+            oceanBadge.className = 'text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark';
+            oceanBtn.setAttribute('disabled', 'true');
+          }
+        }
+
+        const kanDone = isRegionFullyCompleted('kan');
+        const kanCount = getRegionCompletedCount('kan');
+        const kanBadge = document.getElementById('badge-kan-song');
+        const kanBtn = document.getElementById('btn-play-kan-song');
+        if (kanBadge && kanBtn) {
+          if (kanDone) {
+            kanBadge.textContent = '✓ 已解鎖 (6/6)';
+            kanBadge.className = 'text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-400';
+            kanBtn.removeAttribute('disabled');
+          } else {
+            kanBadge.textContent = `未解鎖 (${kanCount}/6)`;
+            kanBadge.className = 'text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark';
+            kanBtn.setAttribute('disabled', 'true');
+          }
+        }
+
+        const weiDone = isRegionFullyCompleted('wei');
+        const weiCount = getRegionCompletedCount('wei');
+        const weiBadge = document.getElementById('badge-wei-song');
+        const weiBtn = document.getElementById('btn-play-wei-song');
+        if (weiBadge && weiBtn) {
+          if (weiDone) {
+            weiBadge.textContent = '✓ 已解鎖 (3/3)';
+            weiBadge.className = 'text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-400';
+            weiBtn.removeAttribute('disabled');
+          } else {
+            weiBadge.textContent = `未解鎖 (${weiCount}/3)`;
+            weiBadge.className = 'text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark';
+            weiBtn.setAttribute('disabled', 'true');
+          }
+        }
+      }
+
+      function updateProgressUI() {
+        const stampBadge = document.getElementById('nav-stamp-badge');
+        if (stampBadge) stampBadge.textContent = stampAlbum.length;
+
+        const songsBadge = document.getElementById('nav-songs-badge');
+        const unlockedCount = getUnlockedSongsCount();
+        if (songsBadge) songsBadge.textContent = `${unlockedCount}/3`;
+
+        const mapProgressEl = document.getElementById('map-music-progress');
+        if (mapProgressEl) {
+          mapProgressEl.textContent = `${unlockedCount} / 3 首`;
+        }
+
+        const oceanCount = getRegionCompletedCount('ocean');
+        const kanCount = getRegionCompletedCount('kan');
+        const weiCount = getRegionCompletedCount('wei');
+
+        const pOcean = document.getElementById('progress-ocean-tag');
+        const pKan = document.getElementById('progress-kan-tag');
+        const pWei = document.getElementById('progress-wei-tag');
+        if (pOcean) pOcean.textContent = `${oceanCount}/3`;
+        if (pKan) pKan.textContent = `${kanCount}/6`;
+        if (pWei) pWei.textContent = `${weiCount}/3`;
+
+        updateMelodyModalBadges();
+      }
+
+      function showFloatingToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-harborNavy text-paperBase px-4 py-2 rounded-full border-2 border-rainYellow shadow-2xl text-xs font-black tracking-wide flex items-center gap-2 animate-bounce max-w-[90vw] truncate';
+        toast.innerHTML = `<span>⚓</span><span>${msg}</span>`;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.remove();
+        }, 3400);
+      }
+
+      /* ================= 關鍵修復：將所有 HTML onclick 呼叫的函式掛載至 window ================= */
+      global.startMode = startMode;
+      global.navigateTo = navigateTo;
+      global.filterAreaSpots = filterAreaSpots;
+      global.openAlbumModal = openAlbumModal;
+      global.closeAlbumModal = closeAlbumModal;
+      global.openMelodyModal = openMelodyModal;
+      global.closeMelodyModal = closeMelodyModal;
+      global.toggleQuizSpeech = toggleQuizSpeech;
+      global.proceedToARFromQuiz = proceedToARFromQuiz;
+      global.completeARScan = completeARScan;
+      global.closeARScan = closeARScan;
+      global.playSingleSpotAudio = playSingleSpotAudio;
+      global.playCurrentRegionFullSong = playCurrentRegionFullSong;
+      global.playRegionFullSong = playRegionFullSong;
+      global.stopAnyPlayingMusic = stopAnyPlayingMusic;
+      global.goToStampMaker = goToStampMaker;
+      global.takeStampSnapshot = takeStampSnapshot;
+      global.saveStampToAlbum = saveStampToAlbum;
+
+      // 初始化載入
+      window.addEventListener('DOMContentLoaded', () => {
+        if (window.lucide) window.lucide.createIcons();
+        loadProgressFromStorage();
+        renderMapPins();
+        updateProgressUI();
+      });
+
+    })(window);
+  </script>
+</body>
+</html>
