@@ -478,10 +478,8 @@
               </h2>
             </div>
 
-            <!-- 3 選 1 選項 -->
             <div id="quiz-options-container" class="space-y-2"></div>
 
-            <!-- 作答後反饋與解說卡 -->
             <div id="quiz-explanation-box" class="hidden p-3.5 rounded-2xl border-2 border-harborNavy/20 bg-paperBase space-y-2">
               <div class="flex items-center justify-between">
                 <span id="quiz-status-pill" class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-500 text-white">答對了！</span>
@@ -499,7 +497,6 @@
             </div>
           </div>
 
-          <!-- 前往 AR 取景 -->
           <div class="mt-4 pt-3 border-t-2 border-harborNavy/15 flex items-center justify-end">
             <button id="btn-proceed-to-ar" onclick="window.proceedToARFromQuiz()" disabled class="flex items-center gap-2 px-5 py-2.5 bg-brickCoral text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-harborNavy shadow-paperEdge hover:bg-brickCoralDark active:translate-y-0.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
               <span>前往 AR 郵票取景掃描</span>
@@ -510,7 +507,7 @@
         </div>
       </section>
 
-      <!-- 4. 【AR 掃描畫面 AR VIEW】：郵票鏤空取景窗 -->
+      <!-- 4. 【AR 掃描畫面 AR VIEW】 -->
       <section id="view-ar" class="view-panel hidden flex-col flex-1 max-w-2xl mx-auto w-full">
         <div class="bg-harborNavy text-paperBase border-3 border-deepIndigo rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-2xl relative flex flex-col justify-between overflow-hidden min-h-[480px] sm:min-h-[540px]">
           
@@ -786,7 +783,7 @@
               <span id="badge-ocean-song" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark">未解鎖 (0/3)</span>
             </div>
             <div class="flex items-center justify-between pt-1">
-              <span class="text-[9px] text-harborNavy/60 font-bold">曲目：Maritime Plaza.mp3</span>
+              <span class="text-[9px] text-harborNavy/60 font-bold">檔名：Maritime Plaza.mp3</span>
               <button id="btn-play-ocean-song" onclick="window.playRegionFullSong('ocean')" disabled class="px-2.5 py-1 bg-keelungSea text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
                 <i data-lucide="play" class="w-3 h-3"></i> 播放
               </button>
@@ -806,7 +803,7 @@
               <span id="badge-kan-song" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark">未解鎖 (0/6)</span>
             </div>
             <div class="flex items-center justify-between pt-1">
-              <span class="text-[9px] text-harborNavy/60 font-bold">曲目：Kanzaiding Fish Market.mp3</span>
+              <span class="text-[9px] text-harborNavy/60 font-bold">檔名：Kanzaiding Fish Market.mp3</span>
               <button id="btn-play-kan-song" onclick="window.playRegionFullSong('kan')" disabled class="px-2.5 py-1 bg-brickCoral text-white font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
                 <i data-lucide="play" class="w-3 h-3"></i> 播放
               </button>
@@ -826,7 +823,7 @@
               <span id="badge-wei-song" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-white border border-harborNavy/30 text-brickCoralDark">未解鎖 (0/3)</span>
             </div>
             <div class="flex items-center justify-between pt-1">
-              <span class="text-[9px] text-harborNavy/60 font-bold">曲目：consignment store.mp3</span>
+              <span class="text-[9px] text-harborNavy/60 font-bold">檔名：consignment store.mp3</span>
               <button id="btn-play-wei-song" onclick="window.playRegionFullSong('wei')" disabled class="px-2.5 py-1 bg-rainYellow text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
                 <i data-lucide="play" class="w-3 h-3"></i> 播放
               </button>
@@ -846,7 +843,7 @@
 
   </div>
 
-  <!-- ================= JAVASCRIPT 全域安全註冊與三大區域音樂設定 ================= -->
+  <!-- ================= JAVASCRIPT 全域安全註冊與修復音訊串接 ================= -->
   <script>
     (function(global) {
       /* ================= 1. 視區動態高度計算 ================= */
@@ -859,11 +856,11 @@
       adjustViewportHeight();
 
       /* ================= 2. 三大區域最終音樂與委託行分點音訊設定 ================= */
-      // 三大核心區域集齊後之最終音樂檔案
+      // 三大核心區域集齊後之最終音樂檔案 (已加入 encodeURI 避免空格導致 404)
       const REGION_FINAL_SONGS = {
-        ocean: './Maritime Plaza.mp3',             // 海洋廣場最終音樂
-        kan: './Kanzaiding Fish Market.mp3',       // 崁仔頂最終音樂
-        wei: './consignment store.mp3'             // 委託行最終音樂
+        ocean: encodeURI('./Maritime Plaza.mp3'),             // 海洋廣場最終音樂
+        kan: encodeURI('./Kanzaiding Fish Market.mp3'),       // 崁仔頂最終音樂
+        wei: encodeURI('./consignment store.mp3')             // 委託行最終音樂
       };
 
       // 委託行 3 個分點樂曲 (曲 1 ~ 3)
@@ -1577,14 +1574,21 @@
           <span class="absolute -top-1 -right-1 w-6 h-6 bg-rainYellow text-deepIndigo font-black text-xs rounded-full border border-harborNavy flex items-center justify-center">♪</span>
         `;
 
+        // 關鍵修復：無論先前是否已集滿，若當前該區域已完整集齊，立即設定專屬完整曲目並展示按鈕
         const fullSongBox = document.getElementById('full-region-song-box');
-        if (!wasFullyDoneBefore && isRegionFullyCompleted(currentSpot.region)) {
+        const fullSongBtn = document.getElementById('play-full-unlocked-song-btn');
+        if (isRegionFullyCompleted(currentSpot.region)) {
           fullSongBox.classList.remove('hidden');
           document.getElementById('full-region-song-title').textContent = `${regDef.name}：${regDef.fullTitle}`;
-          showFloatingToast(`🎊 太棒了！已集齊${currentSpot.regionName}所有子地點！解鎖最終歌曲！`);
-        } else if (isRegionFullyCompleted(currentSpot.region)) {
-          fullSongBox.classList.remove('hidden');
-          document.getElementById('full-region-song-title').textContent = `${regDef.name}：${regDef.fullTitle}`;
+          
+          // 明確綁定按鈕直接調用該區的最終專屬音樂
+          fullSongBtn.onclick = function() {
+            window.playRegionFullSong(currentSpot.region);
+          };
+
+          if (!wasFullyDoneBefore) {
+            showFloatingToast(`🎊 太棒了！已集齊${currentSpot.regionName}所有子地點！解鎖最終歌曲！`);
+          }
         } else {
           fullSongBox.classList.add('hidden');
         }
@@ -1597,7 +1601,7 @@
         navigateTo('map');
       }
 
-      /* ================= 10. 音樂播放邏輯 (支援 MP3 檔案與合成備援) ================= */
+      /* ================= 10. 音樂播放邏輯 (強化路徑與容錯處理) ================= */
       function initAudioContext() {
         if (!audioCtx) {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1629,6 +1633,7 @@
           const audio = new Audio(currentSpot.audioTrackUrl);
           currentActiveAudioElement = audio;
           audio.play().catch(e => {
+            console.warn('音訊播放被瀏覽器限制或無法載入，啟動備援合成音效', e);
             initAudioContext();
             renderSpotWebAudio(currentSpot);
           });
@@ -1668,7 +1673,7 @@
         playRegionFullSong(currentSpot.region);
       }
 
-      // 播放三大區域最終音樂 (Maritime Plaza.mp3 / Kanzaiding Fish Market.mp3 / consignment store.mp3)
+      // 核心修正：播放三大區域最終音樂 (強化 Audio 實例化與錯誤降級)
       function playRegionFullSong(regionKey) {
         if (!isRegionFullyCompleted(regionKey)) {
           showFloatingToast('尚未完成該地點所有子地點的 AR 掃描！');
@@ -1686,8 +1691,9 @@
         if (targetAudioSrc) {
           const audio = new Audio(targetAudioSrc);
           currentActiveAudioElement = audio;
+          
           audio.play().catch(e => {
-            console.warn(`音訊檔 ${targetAudioSrc} 載入失敗或路徑未放置，切換為合成備援音效`, e);
+            console.warn(`音樂檔案 [${targetAudioSrc}] 讀取失敗，原因：可能是未放置同目錄或被瀏覽器阻擋。切換至 Web Audio 即時合成。`, e);
             initAudioContext();
             renderSynthesizedRegionSong(regionKey, songInfo, hint);
           });
