@@ -206,7 +206,7 @@
     <!-- 主視圖容器 -->
     <main class="flex-1 w-full max-w-6xl mx-auto px-3 sm:px-6 py-3 sm:py-6 relative z-10 flex flex-col justify-center">
 
-      <!-- 1. 【首頁 HOME】更改為【開始遊程】與【關於我們】 -->
+      <!-- 1. 【首頁 HOME】：開始遊程 與 關於我們 -->
       <section id="view-home" class="view-panel flex flex-col items-center justify-center flex-1 text-center py-1 sm:py-4">
         
         <div class="relative w-full max-w-2xl h-56 sm:h-72 lg:h-80 my-1 sm:my-3 flex items-center justify-center">
@@ -297,12 +297,12 @@
 
         <!-- 首頁兩按鍵：開始遊程 與 關於我們 -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md px-2">
-          <button onclick="window.navigateTo('modes')" class="w-full sm:w-1/2 py-3.5 px-6 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-base rounded-2xl border-3 border-harborNavy shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex items-center justify-center gap-2">
+          <button type="button" onclick="window.navigateTo('modes')" class="w-full sm:w-1/2 py-3.5 px-6 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-base rounded-2xl border-3 border-harborNavy shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex items-center justify-center gap-2 cursor-pointer">
             <i data-lucide="compass" class="w-5 h-5"></i>
             <span>開始遊程</span>
           </button>
 
-          <button onclick="window.navigateTo('about')" class="w-full sm:w-1/2 py-3.5 px-6 bg-white hover:bg-paperBase text-harborNavy font-black text-base rounded-2xl border-3 border-harborNavy shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex items-center justify-center gap-2">
+          <button type="button" onclick="window.navigateTo('about')" class="w-full sm:w-1/2 py-3.5 px-6 bg-white hover:bg-paperBase text-harborNavy font-black text-base rounded-2xl border-3 border-harborNavy shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex items-center justify-center gap-2 cursor-pointer">
             <i data-lucide="info" class="w-5 h-5 text-keelungSeaDark"></i>
             <span>關於我們</span>
           </button>
@@ -312,7 +312,7 @@
       <!-- 1-B. 【遊程三選一畫面 MODES VIEW】 -->
       <section id="view-modes" class="view-panel hidden flex-col items-center justify-center flex-1 text-center py-1 sm:py-4">
         <div class="flex items-center justify-between w-full max-w-5xl mb-4 px-2">
-          <button onclick="window.navigateTo('home')" class="flex items-center gap-1.5 text-xs font-black text-harborNavy px-3 py-1.5 rounded-xl border-2 border-harborNavy bg-white shadow-paperBtn">
+          <button type="button" onclick="window.navigateTo('home')" class="flex items-center gap-1.5 text-xs font-black text-harborNavy px-3 py-1.5 rounded-xl border-2 border-harborNavy bg-white shadow-paperBtn hover:bg-paperBase cursor-pointer">
             <i data-lucide="arrow-left" class="w-4 h-4"></i> 回首頁
           </button>
           <span class="text-xs font-black bg-rainYellow text-deepIndigo px-3 py-1 rounded-full border border-harborNavy/30">
@@ -322,7 +322,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-5 w-full max-w-5xl px-1">
           <!-- 選格 1: 看見基隆 -->
-          <button onclick="window.startMode('look')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden">
+          <button type="button" onclick="window.startMode('look')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden cursor-pointer">
             <div class="absolute -top-6 -right-6 w-20 h-20 bg-keelungSea/25 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
             <div>
               <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-keelungSea/30 border-2 border-harborNavy flex items-center justify-center text-harborNavy mb-2.5 sm:mb-3">
@@ -347,7 +347,7 @@
           </button>
 
           <!-- 選格 2: 感受基隆 -->
-          <button onclick="window.startMode('feel')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden">
+          <button type="button" onclick="window.startMode('feel')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden cursor-pointer">
             <div class="absolute -top-6 -right-6 w-20 h-20 bg-brickCoral/20 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
             <div>
               <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-brickCoral/25 border-2 border-harborNavy flex items-center justify-center text-harborNavy mb-2.5 sm:mb-3">
@@ -372,7 +372,7 @@
           </button>
 
           <!-- 選格 3: 讀懂基隆 -->
-          <button onclick="window.startMode('understand')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden">
+          <button type="button" onclick="window.startMode('understand')" class="group relative bg-white hover:bg-[#faf6ee] border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-5 text-left shadow-paperEdge hover:-translate-y-1 active:translate-y-0 transition-all flex flex-col justify-between overflow-hidden cursor-pointer">
             <div class="absolute -top-6 -right-6 w-20 h-20 bg-rainYellow/30 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
             <div>
               <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-rainYellow/35 border-2 border-harborNavy flex items-center justify-center text-harborNavy mb-2.5 sm:mb-3">
@@ -409,7 +409,7 @@
                 </div>
                 <h3 class="text-base sm:text-lg font-black text-harborNavy">關於我們</h3>
               </div>
-              <button onclick="window.navigateTo('home')" class="flex items-center gap-1 text-xs font-black text-harborNavy px-3 py-1 rounded-xl border border-harborNavy/30 bg-paperBase">
+              <button type="button" onclick="window.navigateTo('home')" class="flex items-center gap-1 text-xs font-black text-harborNavy px-3 py-1 rounded-xl border border-harborNavy/30 bg-paperBase cursor-pointer">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> 回首頁
               </button>
             </div>
@@ -433,8 +433,8 @@
           </div>
 
           <div class="mt-6 flex justify-end">
-            <button onclick="window.navigateTo('home')" class="px-5 py-2 bg-harborNavy text-white font-black text-xs rounded-xl border border-harborNavy shadow-paperBtn">
-              返回
+            <button type="button" onclick="window.navigateTo('home')" class="px-5 py-2 bg-harborNavy text-white font-black text-xs rounded-xl border border-harborNavy shadow-paperBtn cursor-pointer">
+              返回首頁
             </button>
           </div>
         </div>
@@ -445,7 +445,7 @@
         
         <div class="flex flex-wrap items-center justify-between gap-2.5 mb-3 bg-white/94 border-2 border-harborNavy rounded-2xl p-2.5 sm:p-3 shadow-paperEdge">
           <div class="flex items-center gap-2">
-            <button onclick="window.navigateTo('modes')" class="p-1.5 sm:p-2 hover:bg-paperBase rounded-xl border border-harborNavy/30 text-harborNavy">
+            <button type="button" onclick="window.navigateTo('modes')" class="p-1.5 sm:p-2 hover:bg-paperBase rounded-xl border border-harborNavy/30 text-harborNavy cursor-pointer">
               <i data-lucide="arrow-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
             </button>
             <div>
@@ -488,16 +488,16 @@
 
           <!-- 區域標籤 -->
           <div class="relative z-10 p-2.5 sm:p-4 flex flex-wrap gap-1.5 sm:gap-2">
-            <button onclick="window.filterAreaSpots('all')" id="tab-filter-all" class="map-filter-btn px-3 py-1 bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border-2 border-harborNavy shadow-sm active">全部 (12)</button>
-            <button onclick="window.filterAreaSpots('ocean')" id="tab-filter-ocean" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1">
+            <button type="button" onclick="window.filterAreaSpots('all')" id="tab-filter-all" class="map-filter-btn px-3 py-1 bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border-2 border-harborNavy shadow-sm active cursor-pointer">全部 (12)</button>
+            <button type="button" onclick="window.filterAreaSpots('ocean')" id="tab-filter-ocean" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1 cursor-pointer">
               <span class="w-2 h-2 rounded-full bg-keelungSea border border-harborNavy"></span>
               <span>海洋廣場 (<span id="progress-ocean-tag">0/3</span>)</span>
             </button>
-            <button onclick="window.filterAreaSpots('kan')" id="tab-filter-kan" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1">
+            <button type="button" onclick="window.filterAreaSpots('kan')" id="tab-filter-kan" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1 cursor-pointer">
               <span class="w-2 h-2 rounded-full bg-brickCoral border border-harborNavy"></span>
               <span>崁仔頂 (<span id="progress-kan-tag">0/6</span>)</span>
             </button>
-            <button onclick="window.filterAreaSpots('wei')" id="tab-filter-wei" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1">
+            <button type="button" onclick="window.filterAreaSpots('wei')" id="tab-filter-wei" class="map-filter-btn px-3 py-1 bg-white/85 hover:bg-white text-harborNavy text-[11px] sm:text-xs font-black rounded-full border border-harborNavy/40 shadow-sm flex items-center gap-1 cursor-pointer">
               <span class="w-2 h-2 rounded-full bg-rainYellow border border-harborNavy"></span>
               <span>委託行 (<span id="progress-wei-tag">0/3</span>)</span>
             </button>
@@ -514,7 +514,7 @@
               </div>
               <p class="text-[11px] sm:text-xs text-harborNavy font-bold">點選圖示開啟 AR 掃描！集齊該區所有子點可解鎖專屬完整歌曲！</p>
             </div>
-            <button onclick="window.openMelodyModal()" class="w-full sm:w-auto px-3 py-1.5 bg-brickCoral text-white font-black text-xs rounded-xl border border-harborNavy shadow-paperBtn hover:bg-brickCoralDark active:translate-y-0.5 transition-all text-center">
+            <button type="button" onclick="window.openMelodyModal()" class="w-full sm:w-auto px-3 py-1.5 bg-brickCoral text-white font-black text-xs rounded-xl border border-harborNavy shadow-paperBtn hover:bg-brickCoralDark active:translate-y-0.5 transition-all text-center cursor-pointer">
               查看專屬曲
             </button>
           </div>
@@ -527,7 +527,7 @@
         <div class="bg-white border-3 border-harborNavy rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-paperEdge relative flex flex-col justify-between">
           
           <div class="flex items-center justify-between mb-2.5">
-            <button onclick="window.navigateTo('map')" class="flex items-center gap-1 text-xs font-black text-harborNavy px-2.5 py-1 rounded-xl border border-harborNavy/30 bg-paperBase">
+            <button type="button" onclick="window.navigateTo('map')" class="flex items-center gap-1 text-xs font-black text-harborNavy px-2.5 py-1 rounded-xl border border-harborNavy/30 bg-paperBase cursor-pointer">
               <i data-lucide="arrow-left" class="w-4 h-4"></i> 返回地圖
             </button>
             <span class="px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-black bg-rainYellow text-deepIndigo border border-harborNavy/30">
@@ -551,7 +551,7 @@
               <div class="flex items-center justify-between">
                 <span id="quiz-status-pill" class="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-500 text-white">答對了！</span>
                 
-                <button id="voice-quiz-btn" onclick="window.toggleQuizSpeech()" class="flex items-center gap-1 px-3 py-1 bg-keelungSea text-deepIndigo font-black text-xs rounded-xl border border-harborNavy shadow-sm hover:bg-keelungSeaLight">
+                <button type="button" id="voice-quiz-btn" onclick="window.toggleQuizSpeech()" class="flex items-center gap-1 px-3 py-1 bg-keelungSea text-deepIndigo font-black text-xs rounded-xl border border-harborNavy shadow-sm hover:bg-keelungSeaLight cursor-pointer">
                   <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
                   <span id="voice-quiz-btn-text">語音解說朗讀</span>
                 </button>
@@ -565,7 +565,7 @@
           </div>
 
           <div class="mt-4 pt-3 border-t-2 border-harborNavy/15 flex items-center justify-end">
-            <button id="btn-proceed-to-ar" onclick="window.proceedToARFromQuiz()" disabled class="flex items-center gap-2 px-5 py-2.5 bg-brickCoral text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-harborNavy shadow-paperEdge hover:bg-brickCoralDark active:translate-y-0.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+            <button type="button" id="btn-proceed-to-ar" onclick="window.proceedToARFromQuiz()" disabled class="flex items-center gap-2 px-5 py-2.5 bg-brickCoral text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-harborNavy shadow-paperEdge hover:bg-brickCoralDark active:translate-y-0.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
               <span>前往 AR 郵票取景掃描</span>
               <i data-lucide="camera" class="w-4 h-4 sm:w-5 sm:h-5"></i>
             </button>
@@ -583,7 +583,7 @@
               <span class="w-2.5 h-2.5 rounded-full bg-rainYellow animate-ping"></span>
               <span class="text-[11px] sm:text-xs tracking-wider uppercase text-rainYellow font-black">AR Stamp Viewfinder</span>
             </div>
-            <button onclick="window.closeARScan()" class="text-xs bg-white/20 hover:bg-white/30 text-white px-2.5 py-1 rounded-full border border-white/20 font-bold">
+            <button type="button" onclick="window.closeARScan()" class="text-xs bg-white/20 hover:bg-white/30 text-white px-2.5 py-1 rounded-full border border-white/20 font-bold cursor-pointer">
               返回地圖
             </button>
           </div>
@@ -625,7 +625,7 @@
               <span id="ar-status-text" class="text-rainYellow font-bold flex items-center gap-1.5 text-[11px]">
                 <i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> 感應在地氣息中...
               </span>
-              <button onclick="window.completeARScan()" class="px-3 py-1 bg-keelungSea text-deepIndigo font-black rounded-lg text-xs">
+              <button type="button" onclick="window.completeARScan()" class="px-3 py-1 bg-keelungSea text-deepIndigo font-black rounded-lg text-xs cursor-pointer">
                 立即採集
               </button>
             </div>
@@ -634,12 +634,12 @@
 
           <!-- AR 操作附加按鍵：觀看 AR 動畫 (同等完成蒐集) 與 移動至聲音庫 -->
           <div class="flex items-center gap-2 mt-1.5">
-            <button onclick="window.watchARAnimationAndComplete()" class="flex-1 py-2 px-3 bg-rainYellow hover:bg-rainYellowDark text-deepIndigo font-black text-xs rounded-xl border-2 border-harborNavy shadow-sm flex items-center justify-center gap-1.5 transition-all">
+            <button type="button" onclick="window.watchARAnimationAndComplete()" class="flex-1 py-2 px-3 bg-rainYellow hover:bg-rainYellowDark text-deepIndigo font-black text-xs rounded-xl border-2 border-harborNavy shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer">
               <i data-lucide="sparkles" class="w-4 h-4"></i>
               <span>觀看 AR 動畫並蒐集</span>
             </button>
 
-            <button onclick="window.navigateTo('soundbank')" class="flex-1 py-2 px-3 bg-keelungSea hover:bg-keelungSeaDark text-deepIndigo font-black text-xs rounded-xl border-2 border-harborNavy shadow-sm flex items-center justify-center gap-1.5 transition-all">
+            <button type="button" onclick="window.navigateTo('soundbank')" class="flex-1 py-2 px-3 bg-keelungSea hover:bg-keelungSeaDark text-deepIndigo font-black text-xs rounded-xl border-2 border-harborNavy shadow-sm flex items-center justify-center gap-1.5 transition-all cursor-pointer">
               <i data-lucide="radio" class="w-4 h-4"></i>
               <span>前往聲音庫</span>
             </button>
@@ -673,7 +673,7 @@
                   <p class="text-[10px] text-harborNavy/60 font-bold">收錄三大場域之代表性聲音</p>
                 </div>
               </div>
-              <button onclick="window.navigateTo('ar')" class="flex items-center gap-1 text-xs font-black text-harborNavy px-3 py-1 rounded-xl border border-harborNavy/30 bg-paperBase hover:bg-gray-100">
+              <button type="button" onclick="window.navigateTo('ar')" class="flex items-center gap-1 text-xs font-black text-harborNavy px-3 py-1 rounded-xl border border-harborNavy/30 bg-paperBase hover:bg-gray-100 cursor-pointer">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> 返回 AR
               </button>
             </div>
@@ -691,7 +691,7 @@
                     <p class="text-[10px] text-harborNavy/60 font-bold">海洋廣場・市鳥逆風盤旋的高亢鳴聲</p>
                   </div>
                 </div>
-                <button onclick="window.playSampleSound('kite')" class="px-3 py-1.5 bg-keelungSea text-deepIndigo font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95">
+                <button type="button" onclick="window.playSampleSound('kite')" class="px-3 py-1.5 bg-keelungSea text-deepIndigo font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer">
                   <i data-lucide="play" class="w-3.5 h-3.5"></i> 試聽
                 </button>
               </div>
@@ -707,7 +707,7 @@
                     <p class="text-[10px] text-harborNavy/60 font-bold">海洋廣場・港灣峽灣震盪的啟航音波</p>
                   </div>
                 </div>
-                <button onclick="window.playSampleSound('horn')" class="px-3 py-1.5 bg-keelungSea text-deepIndigo font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95">
+                <button type="button" onclick="window.playSampleSound('horn')" class="px-3 py-1.5 bg-keelungSea text-deepIndigo font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer">
                   <i data-lucide="play" class="w-3.5 h-3.5"></i> 試聽
                 </button>
               </div>
@@ -723,7 +723,7 @@
                     <p class="text-[10px] text-harborNavy/60 font-bold">崁仔頂・飛快韻律與喊價人聲市井節奏</p>
                   </div>
                 </div>
-                <button onclick="window.playSampleSound('auction')" class="px-3 py-1.5 bg-brickCoral text-white font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95">
+                <button type="button" onclick="window.playSampleSound('auction')" class="px-3 py-1.5 bg-brickCoral text-white font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer">
                   <i data-lucide="play" class="w-3.5 h-3.5"></i> 試聽
                 </button>
               </div>
@@ -739,7 +739,7 @@
                     <p class="text-[10px] text-harborNavy/60 font-bold">崁仔頂・清脆冰晶滑落與流水聲</p>
                   </div>
                 </div>
-                <button onclick="window.playSampleSound('ice')" class="px-3 py-1.5 bg-brickCoral text-white font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95">
+                <button type="button" onclick="window.playSampleSound('ice')" class="px-3 py-1.5 bg-brickCoral text-white font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer">
                   <i data-lucide="play" class="w-3.5 h-3.5"></i> 試聽
                 </button>
               </div>
@@ -755,7 +755,7 @@
                     <p class="text-[10px] text-harborNavy/60 font-bold">委託行・洋貨巷弄與留聲機慢速爵士氛圍</p>
                   </div>
                 </div>
-                <button onclick="window.playSampleSound('vinyl')" class="px-3 py-1.5 bg-rainYellow text-deepIndigo font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95">
+                <button type="button" onclick="window.playSampleSound('vinyl')" class="px-3 py-1.5 bg-rainYellow text-deepIndigo font-black text-xs rounded-lg border border-harborNavy flex items-center gap-1 shadow-sm active:scale-95 cursor-pointer">
                   <i data-lucide="play" class="w-3.5 h-3.5"></i> 試聽
                 </button>
               </div>
@@ -763,7 +763,7 @@
           </div>
 
           <div class="pt-3 border-t-2 border-harborNavy/15 flex justify-end">
-            <button onclick="window.navigateTo('ar')" class="px-5 py-2 bg-harborNavy text-white font-black text-xs rounded-xl border border-harborNavy shadow-paperBtn">
+            <button type="button" onclick="window.navigateTo('ar')" class="px-5 py-2 bg-harborNavy text-white font-black text-xs rounded-xl border border-harborNavy shadow-paperBtn cursor-pointer">
               返回 AR 取景
             </button>
           </div>
@@ -802,7 +802,7 @@
             <!-- 單點樂句播放 -->
             <div class="bg-paperBase border-2 border-harborNavy/25 rounded-2xl p-2.5 sm:p-3 mb-3 flex items-center justify-between">
               <div class="flex items-center gap-2.5">
-                <button id="reward-play-btn" onclick="window.playSingleSpotAudio()" class="w-10 h-10 rounded-xl bg-brickCoral text-white flex items-center justify-center border-2 border-harborNavy shadow-sm hover:bg-brickCoralDark active:translate-y-0.5">
+                <button type="button" id="reward-play-btn" onclick="window.playSingleSpotAudio()" class="w-10 h-10 rounded-xl bg-brickCoral text-white flex items-center justify-center border-2 border-harborNavy shadow-sm hover:bg-brickCoralDark active:translate-y-0.5 cursor-pointer">
                   <i id="reward-play-icon" data-lucide="play" class="w-4 h-4"></i>
                 </button>
                 <div class="text-left">
@@ -824,7 +824,7 @@
                 <h4 class="text-xs font-black text-deepIndigo">恭喜解鎖：該地點專屬完整歌曲！</h4>
               </div>
               <p id="full-region-song-title" class="text-[11px] sm:text-xs text-harborNavy font-black mb-2"></p>
-              <button id="play-full-unlocked-song-btn" onclick="window.playCurrentRegionFullSong()" class="w-full py-1.5 bg-white text-deepIndigo text-xs font-black rounded-xl border border-harborNavy flex items-center justify-center gap-1.5 hover:bg-paperBase">
+              <button type="button" id="play-full-unlocked-song-btn" onclick="window.playCurrentRegionFullSong()" class="w-full py-1.5 bg-white text-deepIndigo text-xs font-black rounded-xl border border-harborNavy flex items-center justify-center gap-1.5 hover:bg-paperBase cursor-pointer">
                 <i data-lucide="play-circle" class="w-3.5 h-3.5 text-brickCoral"></i>
                 <span>立即聆聽本區完整歌曲</span>
               </button>
@@ -832,12 +832,12 @@
           </div>
 
           <div class="space-y-2 pt-1">
-            <button onclick="window.goToStampMaker()" class="w-full py-3 px-3 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-sm sm:text-base rounded-2xl border-2 border-harborNavy shadow-paperEdge active:translate-y-0.5 transition-all flex items-center justify-center gap-2">
+            <button type="button" onclick="window.goToStampMaker()" class="w-full py-3 px-3 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-sm sm:text-base rounded-2xl border-2 border-harborNavy shadow-paperEdge active:translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer">
               <i data-lucide="stamp" class="w-4 h-4 sm:w-5 sm:h-5"></i>
               <span>跳轉至：拍照製作郵票完成集郵</span>
             </button>
 
-            <button onclick="window.navigateTo('map')" class="w-full py-2 px-3 bg-white hover:bg-paperBase text-harborNavy font-bold text-xs sm:text-sm rounded-xl border border-harborNavy/30">
+            <button type="button" onclick="window.navigateTo('map')" class="w-full py-2 px-3 bg-white hover:bg-paperBase text-harborNavy font-bold text-xs sm:text-sm rounded-xl border border-harborNavy/30 cursor-pointer">
               返回地圖探索其他子地點
             </button>
           </div>
@@ -853,7 +853,7 @@
             <span class="text-[11px] font-black px-2.5 py-0.5 bg-keelungSea text-deepIndigo rounded-full border border-harborNavy/30">
               基隆漫步紀念集郵所
             </span>
-            <button onclick="window.navigateTo('map')" class="text-xs font-bold text-harborNavy/70 hover:text-harborNavy">
+            <button type="button" onclick="window.navigateTo('map')" class="text-xs font-bold text-harborNavy/70 hover:text-harborNavy cursor-pointer">
               返回地圖
             </button>
           </div>
@@ -885,13 +885,13 @@
           </div>
 
           <div class="space-y-2 mt-2">
-            <button onclick="window.takeStampSnapshot()" class="w-full py-2.5 bg-rainYellow hover:bg-yellow-400 text-deepIndigo font-black text-xs sm:text-sm rounded-xl border-2 border-harborNavy shadow-sm flex items-center justify-center gap-1.5 active:scale-98">
+            <button type="button" onclick="window.takeStampSnapshot()" class="w-full py-2.5 bg-rainYellow hover:bg-yellow-400 text-deepIndigo font-black text-xs sm:text-sm rounded-xl border-2 border-harborNavy shadow-sm flex items-center justify-center gap-1.5 active:scale-98 cursor-pointer">
               <i data-lucide="camera" class="w-4 h-4"></i>
               <span>按下快門拍照 / 切換代表插畫</span>
             </button>
 
             <!-- 集郵後返回至地圖而不是首頁 -->
-            <button onclick="window.saveStampToAlbum()" class="w-full py-3 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-harborNavy shadow-paperEdge active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5">
+            <button type="button" onclick="window.saveStampToAlbum()" class="w-full py-3 bg-brickCoral hover:bg-brickCoralDark text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-harborNavy shadow-paperEdge active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
               <i data-lucide="bookmark-check" class="w-4 h-4 sm:w-5 sm:h-5"></i>
               <span>儲存至集郵冊並返回地圖</span>
             </button>
@@ -923,7 +923,7 @@
             </div>
             <h3 class="text-sm sm:text-base font-black text-harborNavy">漫步基隆・集郵手帳本</h3>
           </div>
-          <button onclick="window.closeAlbumModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-paperBase flex items-center justify-center text-harborNavy border border-harborNavy/30">
+          <button type="button" onclick="window.closeAlbumModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-paperBase flex items-center justify-center text-harborNavy border border-harborNavy/30 cursor-pointer">
             <i data-lucide="x" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
           </button>
         </div>
@@ -934,7 +934,7 @@
         </div>
 
         <div class="pt-2.5 border-t-2 border-harborNavy/15 flex justify-end">
-          <button onclick="window.closeAlbumModal()" class="px-4 py-1.5 bg-keelungSea text-deepIndigo font-black text-xs rounded-xl border border-harborNavy">
+          <button type="button" onclick="window.closeAlbumModal()" class="px-4 py-1.5 bg-keelungSea text-deepIndigo font-black text-xs rounded-xl border border-harborNavy cursor-pointer">
             關閉手帳
           </button>
         </div>
@@ -956,7 +956,7 @@
               <p class="text-[10px] text-harborNavy/60 font-bold">收集完該地點所有子點即可解鎖完整樂章</p>
             </div>
           </div>
-          <button onclick="window.closeMelodyModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-paperBase flex items-center justify-center text-harborNavy border border-harborNavy/30">
+          <button type="button" onclick="window.closeMelodyModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-paperBase flex items-center justify-center text-harborNavy border border-harborNavy/30 cursor-pointer">
             <i data-lucide="x" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
           </button>
         </div>
@@ -976,7 +976,7 @@
             </div>
             <div class="flex items-center justify-between pt-1">
               <span class="text-[9px] text-harborNavy/60 font-bold">檔名：Maritime Plaza.mp3</span>
-              <button id="btn-play-ocean-song" onclick="window.playRegionFullSong('ocean')" disabled class="px-2.5 py-1 bg-keelungSea text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
+              <button type="button" id="btn-play-ocean-song" onclick="window.playRegionFullSong('ocean')" disabled class="px-2.5 py-1 bg-keelungSea text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs cursor-pointer">
                 <i data-lucide="play" class="w-3 h-3"></i> 播放
               </button>
             </div>
@@ -996,7 +996,7 @@
             </div>
             <div class="flex items-center justify-between pt-1">
               <span class="text-[9px] text-harborNavy/60 font-bold">檔名：Kanzaiding Fish Market.mp3</span>
-              <button id="btn-play-kan-song" onclick="window.playRegionFullSong('kan')" disabled class="px-2.5 py-1 bg-brickCoral text-white font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
+              <button type="button" id="btn-play-kan-song" onclick="window.playRegionFullSong('kan')" disabled class="px-2.5 py-1 bg-brickCoral text-white font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs cursor-pointer">
                 <i data-lucide="play" class="w-3 h-3"></i> 播放
               </button>
             </div>
@@ -1016,7 +1016,7 @@
             </div>
             <div class="flex items-center justify-between pt-1">
               <span class="text-[9px] text-harborNavy/60 font-bold">檔名：consignment store.mp3</span>
-              <button id="btn-play-wei-song" onclick="window.playRegionFullSong('wei')" disabled class="px-2.5 py-1 bg-rainYellow text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs">
+              <button type="button" id="btn-play-wei-song" onclick="window.playRegionFullSong('wei')" disabled class="px-2.5 py-1 bg-rainYellow text-deepIndigo font-black rounded-lg border border-harborNavy disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 shadow-sm text-xs cursor-pointer">
                 <i data-lucide="play" class="w-3 h-3"></i> 播放
               </button>
             </div>
@@ -1025,7 +1025,7 @@
 
         <div class="pt-2.5 border-t-2 border-harborNavy/15 flex items-center justify-between text-xs font-bold text-harborNavy">
           <span id="playing-song-hint" class="text-brickCoralDark font-black text-[11px]">點擊按鈕聆聽專屬歌曲</span>
-          <button onclick="window.stopAnyPlayingMusic()" class="px-2.5 py-1 bg-paperBase rounded-lg border border-harborNavy/30 text-harborNavy/80 hover:bg-gray-100 text-xs">
+          <button type="button" onclick="window.stopAnyPlayingMusic()" class="px-2.5 py-1 bg-paperBase rounded-lg border border-harborNavy/30 text-harborNavy/80 hover:bg-gray-100 text-xs cursor-pointer">
             停止播放
           </button>
         </div>
@@ -1035,7 +1035,7 @@
 
   </div>
 
-  <!-- ================= JAVASCRIPT 全域安全註冊與更新邏輯 ================= -->
+  <!-- ================= JAVASCRIPT 全域核心安全修復 ================= -->
   <script>
     (function(global) {
       /* ================= 1. 視區動態高度計算 ================= */
@@ -1049,20 +1049,20 @@
 
       /* ================= 2. 三大區域最終音樂與委託行分點音訊設定 ================= */
       const REGION_FINAL_SONGS = {
-        ocean: encodeURI('./Maritime Plaza.mp3'),             // 海洋廣場最終音樂
-        kan: encodeURI('./Kanzaiding Fish Market.mp3'),       // 崁仔頂最終音樂
-        wei: encodeURI('./consignment store.mp3')             // 委託行最終音樂
+        ocean: encodeURI('./Maritime Plaza.mp3'),
+        kan: encodeURI('./Kanzaiding Fish Market.mp3'),
+        wei: encodeURI('./consignment store.mp3')
       };
 
       const WEITUO_AUDIO_SOURCES = {
-        spot1: 'https://files.catbox.moe/qfm7ky.mp3',   // 曲 1：Bass[cite: 4]
-        spot2: 'https://files.catbox.moe/mrmbg7.mp3',  // 曲 2：Drums
-        spot3: 'https://files.catbox.moe/6ri4yw.mp3'   // 曲 3：Other
+        spot1: 'https://files.catbox.moe/qfm7ky.mp3',[cite: 4]
+        spot2: 'https://files.catbox.moe/mrmbg7.mp3',
+        spot3: 'https://files.catbox.moe/6ri4yw.mp3'
       };
 
       /* ================= 3. 12 個子地點與歷史問答題目資料庫 ================= */
       const SPOTS_DATA = [
-        // --- 海洋廣場 (3個子點) ---
+        // 海洋廣場
         {
           id: 'spot-ocean-1',
           region: 'ocean',
@@ -1130,7 +1130,7 @@
           toneFreqs: [329.63, 392.00, 493.88, 659.25]
         },
 
-        // --- 崁仔頂 (6個子點) ---
+        // 崁仔頂
         {
           id: 'spot-kan-1',
           region: 'kan',
@@ -1264,7 +1264,7 @@
           toneFreqs: [329.63, 415.30, 493.88, 659.25]
         },
 
-        // --- 委託行 (3個分點：分別綁定曲 1、曲 2、曲 3) ---
+        // 委託行
         {
           id: 'spot-wei-1',
           region: 'wei',
@@ -1377,109 +1377,372 @@
         }
       };
 
-      /* ================= 4. 聲音庫音訊合成器 ================= */
-      function playSampleSound(type) {
-        initAudioContext();
-        stopAnyPlayingMusic();
-        const now = audioCtx.currentTime;
-
-        if (type === 'kite') {
-          // 黑鳶高亢叫聲
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(1400, now);
-          osc.frequency.exponentialRampToValueAtTime(2600, now + 0.35);
-          osc.frequency.exponentialRampToValueAtTime(1200, now + 0.8);
-          gain.gain.setValueAtTime(0.001, now);
-          gain.gain.linearRampToValueAtTime(0.25, now + 0.1);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(now);
-          osc.stop(now + 0.9);
-          showFloatingToast('正在播放：黑鳶啼叫聲 🦅');
-        } else if (type === 'horn') {
-          // 郵輪深沉鳴笛聲
-          [130.81, 164.81].forEach(f => {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(f, now);
-            gain.gain.setValueAtTime(0.001, now);
-            gain.gain.linearRampToValueAtTime(0.2, now + 0.3);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start(now);
-            osc.stop(now + 1.9);
-          });
-          showFloatingToast('正在播放：郵輪深沉鳴笛聲 🚢');
-        } else if (type === 'auction') {
-          // 糶手叫賣 rhythm
-          [523.25, 587.33, 659.25, 783.99, 659.25].forEach((f, i) => {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(f, now + i * 0.12);
-            gain.gain.setValueAtTime(0.18, now + i * 0.12);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.1);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start(now + i * 0.12);
-            osc.stop(now + i * 0.12 + 0.11);
-          });
-          showFloatingToast('正在播放：糶手叫賣韻律 📢');
-        } else if (type === 'ice') {
-          // 碎冰清脆碰撞聲
-          for (let i = 0; i < 6; i++) {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(1800 + Math.random() * 1200, now + i * 0.08);
-            gain.gain.setValueAtTime(0.15, now + i * 0.08);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.06);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start(now + i * 0.08);
-            osc.stop(now + i * 0.08 + 0.07);
-          }
-          showFloatingToast('正在播放：碎冰清脆傾倒聲 ❄️');
-        } else if (type === 'vinyl') {
-          // 老黑膠沙沙聲與爵士雙音
-          [220, 277.18].forEach(f => {
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(f, now);
-            gain.gain.setValueAtTime(0.001, now);
-            gain.gain.linearRampToValueAtTime(0.16, now + 0.1);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start(now);
-            osc.stop(now + 1.3);
-          });
-          showFloatingToast('正在播放：復古黑膠落軌沙沙聲 📻');
+      /* ================= 4. 專屬手繪圖示生成器 ================= */
+      function getKeelungSpotSVG(type, size = 56) {
+        const s = size === 56 ? 'w-11 h-11 sm:w-13 sm:h-13' : 'w-7 h-7 sm:w-8 sm:h-8';
+        switch (type) {
+          case 'ship':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <path d="M12 66 L88 66 L78 86 L22 86 Z" fill="#ffffff" stroke="#233748" stroke-width="3"/>
+              <rect x="28" y="44" width="44" height="22" rx="3" fill="#7fc5be" stroke="#233748" stroke-width="2.5"/>
+              <rect x="44" y="30" width="12" height="14" fill="#e57361" stroke="#233748" stroke-width="2"/>
+              <circle cx="38" cy="55" r="3" fill="#f5c84c"/><circle cx="50" cy="55" r="3" fill="#f5c84c"/><circle cx="62" cy="55" r="3" fill="#f5c84c"/>
+            </svg>`;
+          case 'waves':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="15" y="24" width="70" height="20" rx="3" fill="#f6f1e7" stroke="#233748" stroke-width="2.5"/>
+              <path d="M10 60 Q30 45 50 60 T90 60" stroke="#7fc5be" stroke-width="3.5" fill="none"/>
+              <path d="M15 76 Q35 62 55 76 T95 76" stroke="#233748" stroke-width="3" fill="none"/>
+            </svg>`;
+          case 'kite':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <path d="M10 50 Q45 20 50 45 Q55 20 90 50 Q65 48 50 72 Q35 48 10 50 Z" fill="#233748" stroke="#ffffff" stroke-width="2"/>
+              <circle cx="50" cy="48" r="3.5" fill="#f5c84c"/>
+            </svg>`;
+          case 'fish':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <ellipse cx="50" cy="50" rx="32" ry="16" fill="#dce8f0" stroke="#233748" stroke-width="3"/>
+              <polygon points="18,50 5,34 5,66" fill="#7fc5be" stroke="#233748" stroke-width="2.5"/>
+              <circle cx="70" cy="46" r="3.5" fill="#233748"/>
+            </svg>`;
+          case 'basket':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <polygon points="25,45 75,45 68,78 32,78" fill="#e57361" stroke="#233748" stroke-width="3"/>
+              <line x1="30" y1="56" x2="70" y2="56" stroke="#ffffff" stroke-width="2.5"/>
+            </svg>`;
+          case 'scale':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <line x1="50" y1="20" x2="50" y2="78" stroke="#233748" stroke-width="3"/>
+              <line x1="22" y1="36" x2="78" y2="36" stroke="#233748" stroke-width="3"/>
+              <path d="M12 56 Q22 66 32 56 Z" fill="#f5c84c" stroke="#233748" stroke-width="2"/>
+              <path d="M68 56 Q78 66 88 56 Z" fill="#f5c84c" stroke="#233748" stroke-width="2"/>
+            </svg>`;
+          case 'ice':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="20" y="48" width="24" height="24" rx="4" fill="#dce8f0" stroke="#233748" stroke-width="2.5" transform="rotate(15 20 48)"/>
+              <rect x="52" y="42" width="26" height="26" rx="4" fill="#ffffff" stroke="#233748" stroke-width="2.5" transform="rotate(-12 52 42)"/>
+            </svg>`;
+          case 'bell':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <path d="M30 65 C30 40 40 25 50 25 C60 25 70 40 70 65 Z" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+              <circle cx="50" cy="78" r="5" fill="#233748"/>
+            </svg>`;
+          case 'lamp':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <line x1="50" y1="10" x2="50" y2="42" stroke="#233748" stroke-width="3"/>
+              <circle cx="50" cy="62" r="20" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+            </svg>`;
+          case 'suitcase':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="20" y="35" width="60" height="42" rx="6" fill="#f5c84c" stroke="#233748" stroke-width="3"/>
+              <rect x="42" y="24" width="16" height="11" rx="3" fill="none" stroke="#233748" stroke-width="3"/>
+            </svg>`;
+          case 'gramophone':
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="52" r="28" fill="#233748" stroke="#233748" stroke-width="2"/>
+              <circle cx="50" cy="52" r="14" fill="#f5c84c"/>
+              <circle cx="50" cy="52" r="4" fill="#e57361"/>
+            </svg>`;
+          case 'perfume':
+          default:
+            return `<svg class="${s}" viewBox="0 0 100 100" fill="none">
+              <rect x="35" y="44" width="30" height="38" rx="6" fill="#7fc5be" stroke="#233748" stroke-width="3"/>
+              <circle cx="50" cy="24" r="7" fill="#e57361" stroke="#233748" stroke-width="2.5"/>
+            </svg>`;
         }
       }
 
-      /* ================= 5. AR 動畫觀看並完成蒐集 ================= */
-      function watchARAnimationAndComplete() {
-        showFloatingToast('🎬 正在播放 AR 實境動畫...');
-        const targetBox = document.getElementById('ar-monster-target');
-        if (targetBox) {
-          targetBox.classList.add('scale-125', 'rotate-12');
+      /* ================= 5. 全局狀態 ================= */
+      let currentMode = 'look';
+      let currentSpot = null;
+      let completedSpots = new Set();
+      let stampAlbum = [];
+      let activeCameraStream = null;
+      let audioCtx = null;
+      let speechSynth = window.speechSynthesis;
+      let activeUtterance = null;
+      let activeAudioTimers = [];
+      let currentActiveAudioElement = null;
+
+      function loadProgressFromStorage() {
+        const savedSpots = localStorage.getItem('keelung_completed_spots');
+        if (savedSpots) {
+          try { completedSpots = new Set(JSON.parse(savedSpots)); } catch (e) { completedSpots = new Set(); }
         }
-        setTimeout(() => {
-          if (targetBox) {
-            targetBox.classList.remove('scale-125', 'rotate-12');
-          }
-          completeARScan();
-        }, 1200);
+        const savedStamps = localStorage.getItem('keelung_stamps');
+        if (savedStamps) {
+          try { stampAlbum = JSON.parse(savedStamps); } catch (e) { stampAlbum = []; }
+        }
       }
 
-      /* ================= 6. AR 掃描完成邏輯 ================= */
+      function saveCompletedSpotsToStorage() {
+        localStorage.setItem('keelung_completed_spots', JSON.stringify([...completedSpots]));
+      }
+
+      function isRegionFullyCompleted(regionKey) {
+        const regionSpots = SPOTS_DATA.filter(s => s.region === regionKey);
+        return regionSpots.every(s => completedSpots.has(s.id));
+      }
+
+      function getRegionCompletedCount(regionKey) {
+        const regionSpots = SPOTS_DATA.filter(s => s.region === regionKey);
+        return regionSpots.filter(s => completedSpots.has(s.id)).length;
+      }
+
+      function getUnlockedSongsCount() {
+        let count = 0;
+        if (isRegionFullyCompleted('ocean')) count++;
+        if (isRegionFullyCompleted('kan')) count++;
+        if (isRegionFullyCompleted('wei')) count++;
+        return count;
+      }
+
+      /* ================= 6. 核心視圖導航切換 (已徹底修復 hidden 與 flex 衝突) ================= */
+      function navigateTo(viewId) {
+        document.querySelectorAll('.view-panel').forEach(el => {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        });
+
+        const target = document.getElementById(`view-${viewId}`);
+        if (target) {
+          target.classList.remove('hidden');
+          target.classList.add('flex');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        if (viewId !== 'ar' && viewId !== 'stamp') {
+          stopCameraFeed();
+        }
+        if (speechSynth && speechSynth.speaking) {
+          speechSynth.cancel();
+        }
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function startMode(mode) {
+        currentMode = mode;
+        const labelEl = document.getElementById('map-mode-label');
+        if (labelEl) {
+          if (mode === 'look') {
+            labelEl.textContent = '看見基隆';
+          } else if (mode === 'feel') {
+            labelEl.textContent = '感受基隆（觸覺引導）';
+          } else if (mode === 'understand') {
+            labelEl.textContent = '讀懂基隆（歷史問答）';
+          }
+        }
+        renderMapPins();
+        updateProgressUI();
+        navigateTo('map');
+      }
+
+      /* ================= 7. 地圖點位渲染 ================= */
+      function renderMapPins(filter = 'all') {
+        const container = document.getElementById('map-pins-layer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        SPOTS_DATA.forEach((spot, idx) => {
+          if (filter !== 'all' && spot.region !== filter) return;
+
+          const isDone = completedSpots.has(spot.id);
+          const pin = document.createElement('div');
+          pin.className = 'absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 group transition-all duration-300';
+          pin.style.left = `${spot.x}%`;
+          pin.style.top = `${spot.y}%`;
+
+          pin.innerHTML = `
+            <div class="relative flex flex-col items-center">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl border-2 border-harborNavy flex items-center justify-center shadow-paperBtn transition-transform group-hover:scale-125 ${isDone ? 'ring-2 ring-emerald-500 bg-white' : 'animate-bounce'}" style="background-color: ${isDone ? '#ffffff' : spot.color}; animation-duration: ${2.6 + (idx % 3) * 0.4}s;">
+                ${getKeelungSpotSVG(spot.objectType, 30)}
+              </div>
+              <div class="mt-1 px-2 py-0.5 bg-white/95 border border-harborNavy/30 rounded-md text-[9px] sm:text-[10px] font-black text-harborNavy shadow-sm whitespace-nowrap pointer-events-none group-hover:bg-rainYellow transition-colors flex items-center gap-1">
+                <span>${spot.title}</span>
+                ${isDone ? '<span class="text-emerald-600">✓</span>' : ''}
+              </div>
+            </div>
+          `;
+
+          pin.onclick = () => onSpotSelected(spot);
+          container.appendChild(pin);
+        });
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function filterAreaSpots(area) {
+        document.querySelectorAll('.map-filter-btn').forEach(b => {
+          b.classList.remove('bg-white', 'active');
+          b.classList.add('bg-white/85');
+        });
+        const activeBtn = document.getElementById(`tab-filter-${area}`);
+        if (activeBtn) {
+          activeBtn.classList.remove('bg-white/85');
+          activeBtn.classList.add('bg-white', 'active');
+        }
+        renderMapPins(area);
+      }
+
+      function onSpotSelected(spot) {
+        currentSpot = spot;
+        if (currentMode === 'understand') {
+          setupQuizView(spot);
+          navigateTo('story');
+        } else {
+          setupARView(spot);
+          navigateTo('ar');
+        }
+      }
+
+      /* ================= 8. 讀懂基隆：歷史問答 ================= */
+      function setupQuizView(spot) {
+        document.getElementById('quiz-spot-tag').textContent = `${spot.regionName}・${spot.title}`;
+        document.getElementById('quiz-question-title').textContent = spot.quiz.question;
+
+        const banner = document.getElementById('story-art-banner');
+        banner.innerHTML = `
+          <div class="relative w-full h-full flex items-center justify-center bg-[#eae2d3]">
+            <svg class="w-full h-full" viewBox="0 0 500 200" fill="none">
+              <rect width="500" height="200" fill="#f6f1e7"/>
+              <path d="M0,170 Q150,110 300,150 T500,120 L500,200 L0,200 Z" fill="${spot.color}" opacity="0.5"/>
+              <circle cx="120" cy="70" r="35" fill="#f5c84c" opacity="0.8"/>
+            </svg>
+            <div class="absolute p-2.5 bg-white/95 rounded-2xl border-2 border-harborNavy shadow-md animate-bounce">
+              ${getKeelungSpotSVG(spot.objectType, 48)}
+            </div>
+          </div>
+        `;
+
+        const optionsContainer = document.getElementById('quiz-options-container');
+        optionsContainer.innerHTML = '';
+
+        const explanationBox = document.getElementById('quiz-explanation-box');
+        explanationBox.classList.add('hidden');
+
+        const proceedBtn = document.getElementById('btn-proceed-to-ar');
+        proceedBtn.setAttribute('disabled', 'true');
+
+        spot.quiz.options.forEach((opt) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'quiz-opt-btn w-full text-left p-3 rounded-xl border-2 border-harborNavy/25 bg-paperBase hover:bg-white text-xs sm:text-sm font-bold text-harborNavy transition-all flex items-center justify-between shadow-sm cursor-pointer';
+          btn.innerHTML = `<span>${opt.text}</span><i data-lucide="circle" class="w-4 h-4 text-harborNavy/40"></i>`;
+          
+          btn.onclick = () => onSelectQuizOption(opt, btn, spot);
+          optionsContainer.appendChild(btn);
+        });
+
+        document.getElementById('voice-quiz-btn-text').textContent = '語音解說朗讀';
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function onSelectQuizOption(selectedOption, clickedBtn, spot) {
+        document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+          btn.classList.add('pointer-events-none', 'opacity-60');
+        });
+        clickedBtn.classList.remove('opacity-60');
+
+        const statusPill = document.getElementById('quiz-status-pill');
+        const explanationBox = document.getElementById('quiz-explanation-box');
+        const explanationText = document.getElementById('quiz-explanation-text');
+        const proceedBtn = document.getElementById('btn-proceed-to-ar');
+
+        if (selectedOption.correct) {
+          clickedBtn.classList.add('bg-emerald-100', 'border-emerald-600', 'text-emerald-900');
+          statusPill.textContent = '恭喜答對！獲得印記靈感';
+          statusPill.className = 'text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-500 text-white';
+        } else {
+          clickedBtn.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+          statusPill.textContent = '雖然答錯了，但來看看典故吧！';
+          statusPill.className = 'text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-500 text-white';
+        }
+
+        explanationText.textContent = spot.quiz.explanation;
+        explanationBox.classList.remove('hidden');
+
+        proceedBtn.removeAttribute('disabled');
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function toggleQuizSpeech() {
+        if (!window.speechSynthesis) {
+          showFloatingToast('您的瀏覽器不支援語音朗讀功能');
+          return;
+        }
+        if (speechSynth.speaking) {
+          speechSynth.cancel();
+          document.getElementById('voice-quiz-btn-text').textContent = '語音解說朗讀';
+          return;
+        }
+        if (currentSpot) {
+          const textToRead = `${currentSpot.regionName}，${currentSpot.title}。${currentSpot.quiz.explanation}`;
+          activeUtterance = new SpeechSynthesisUtterance(textToRead);
+          activeUtterance.lang = 'zh-TW';
+          activeUtterance.rate = 0.95;
+
+          activeUtterance.onstart = () => {
+            document.getElementById('voice-quiz-btn-text').textContent = '朗讀中 (點擊停止)';
+          };
+          activeUtterance.onend = () => {
+            document.getElementById('voice-quiz-btn-text').textContent = '重新聆聽語音';
+          };
+          speechSynth.speak(activeUtterance);
+        }
+      }
+
+      function proceedToARFromQuiz() {
+        if (speechSynth.speaking) speechSynth.cancel();
+        setupARView(currentSpot);
+        navigateTo('ar');
+      }
+
+      /* ================= 9. AR 取景與掃描 ================= */
+      function setupARView(spot) {
+        const sensoryPanel = document.getElementById('ar-sensory-panel');
+        const sensoryText = document.getElementById('ar-sensory-text');
+
+        if (currentMode === 'feel' || currentMode === 'understand') {
+          sensoryPanel.classList.remove('hidden');
+          sensoryText.textContent = spot.sensory;
+        } else {
+          sensoryPanel.classList.add('hidden');
+        }
+
+        const iconBox = document.getElementById('ar-target-icon-box');
+        iconBox.innerHTML = getKeelungSpotSVG(spot.objectType, 56);
+        document.getElementById('ar-target-name-badge').textContent = `感應到：${spot.objectName}！點擊採集`;
+
+        startCameraFeed('ar-video-feed', 'ar-fallback-art');
+      }
+
+      function startCameraFeed(videoElementId, fallbackId) {
+        const video = document.getElementById(videoElementId);
+        const fallback = document.getElementById(fallbackId);
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment' }
+          })
+          .then(stream => {
+            activeCameraStream = stream;
+            video.srcObject = stream;
+            video.classList.remove('hidden');
+            if (fallback) fallback.classList.add('opacity-10');
+          })
+          .catch(err => {
+            video.classList.add('hidden');
+            if (fallback) fallback.classList.remove('opacity-10');
+          });
+        }
+      }
+
+      function stopCameraFeed() {
+        if (activeCameraStream) {
+          activeCameraStream.getTracks().forEach(track => track.stop());
+          activeCameraStream = null;
+        }
+      }
+
       function completeARScan() {
         stopCameraFeed();
 
@@ -1488,7 +1751,6 @@
         saveCompletedSpotsToStorage();
         updateProgressUI();
 
-        // 採集完成播放子地點專屬樂句
         playSingleSpotAudio();
 
         const regDef = REGION_SONG_DEFINITIONS[currentSpot.region];
@@ -1527,29 +1789,26 @@
         navigateTo('reward');
       }
 
-      /* ================= 7. 儲存集郵後返回地圖 (重要更新) ================= */
-      function saveStampToAlbum() {
-        const canvas = document.getElementById('stamp-capture-canvas');
-        const stampDataUrl = canvas.toDataURL('image/jpeg', 0.85);
-
-        const stampItem = {
-          id: 'stamp-' + Date.now(),
-          title: currentSpot ? `${currentSpot.regionName}・${currentSpot.title}` : '基隆漫步印記',
-          regionName: currentSpot ? currentSpot.regionName : '海洋廣場',
-          date: '2026.10.15',
-          image: stampDataUrl
-        };
-
-        stampAlbum.push(stampItem);
-        localStorage.setItem('keelung_stamps', JSON.stringify(stampAlbum));
-
-        updateProgressUI();
-        showFloatingToast('郵票已收入集郵手帳本！');
-        // 集郵後返回至地圖而不是首頁
+      function closeARScan() {
+        stopCameraFeed();
         navigateTo('map');
       }
 
-      /* ================= 8. 音樂播放邏輯 ================= */
+      function watchARAnimationAndComplete() {
+        showFloatingToast('🎬 正在播放 AR 實境動畫...');
+        const targetBox = document.getElementById('ar-monster-target');
+        if (targetBox) {
+          targetBox.classList.add('scale-125', 'rotate-12');
+        }
+        setTimeout(() => {
+          if (targetBox) {
+            targetBox.classList.remove('scale-125', 'rotate-12');
+          }
+          completeARScan();
+        }, 1200);
+      }
+
+      /* ================= 10. 音樂播放邏輯 (強化路徑與容錯處理) ================= */
       function initAudioContext() {
         if (!audioCtx) {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1638,7 +1897,6 @@
           currentActiveAudioElement = audio;
           
           audio.play().catch(e => {
-            console.warn(`音樂檔案 [${targetAudioSrc}] 讀取失敗，啟動即時合成備援。`, e);
             initAudioContext();
             renderSynthesizedRegionSong(regionKey, songInfo, hint);
           });
@@ -1697,7 +1955,88 @@
         activeAudioTimers.push(endTimer);
       }
 
-      /* ================= 9. 拍照集郵輔助 ================= */
+      function playSampleSound(type) {
+        initAudioContext();
+        stopAnyPlayingMusic();
+        const now = audioCtx.currentTime;
+
+        if (type === 'kite') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(1400, now);
+          osc.frequency.exponentialRampToValueAtTime(2600, now + 0.35);
+          osc.frequency.exponentialRampToValueAtTime(1200, now + 0.8);
+          gain.gain.setValueAtTime(0.001, now);
+          gain.gain.linearRampToValueAtTime(0.25, now + 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.9);
+          showFloatingToast('正在播放：黑鳶啼叫聲 🦅');
+        } else if (type === 'horn') {
+          [130.81, 164.81].forEach(f => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(f, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.2, now + 0.3);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 1.9);
+          });
+          showFloatingToast('正在播放：郵輪深沉鳴笛聲 🚢');
+        } else if (type === 'auction') {
+          [523.25, 587.33, 659.25, 783.99, 659.25].forEach((f, i) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(f, now + i * 0.12);
+            gain.gain.setValueAtTime(0.18, now + i * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now + i * 0.12);
+            osc.stop(now + i * 0.12 + 0.11);
+          });
+          showFloatingToast('正在播放：糶手叫賣韻律 📢');
+        } else if (type === 'ice') {
+          for (let i = 0; i < 6; i++) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1800 + Math.random() * 1200, now + i * 0.08);
+            gain.gain.setValueAtTime(0.15, now + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.06);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now + i * 0.08);
+            osc.stop(now + i * 0.08 + 0.07);
+          }
+          showFloatingToast('正在播放：碎冰清脆傾倒聲 ❄️');
+        } else if (type === 'vinyl') {
+          [220, 277.18].forEach(f => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(f, now);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.16, now + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 1.3);
+          });
+          showFloatingToast('正在播放：復古黑膠落軌沙沙聲 📻');
+        }
+      }
+
+      /* ================= 11. 拍照集郵與郵戳 ================= */
       function goToStampMaker() {
         navigateTo('stamp');
 
@@ -1795,6 +2134,26 @@
           drawArtisticStampCanvas();
           showFloatingToast('已切換專屬手繪紀念印記！');
         }
+      }
+
+      function saveStampToAlbum() {
+        const canvas = document.getElementById('stamp-capture-canvas');
+        const stampDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+        const stampItem = {
+          id: 'stamp-' + Date.now(),
+          title: currentSpot ? `${currentSpot.regionName}・${currentSpot.title}` : '基隆漫步印記',
+          regionName: currentSpot ? currentSpot.regionName : '海洋廣場',
+          date: '2026.10.15',
+          image: stampDataUrl
+        };
+
+        stampAlbum.push(stampItem);
+        localStorage.setItem('keelung_stamps', JSON.stringify(stampAlbum));
+
+        updateProgressUI();
+        showFloatingToast('郵票已收入集郵手帳本！');
+        navigateTo('map');
       }
 
       function openAlbumModal() {
@@ -1929,12 +2288,7 @@
         }, 3400);
       }
 
-      function closeARScan() {
-        stopCameraFeed();
-        navigateTo('map');
-      }
-
-      /* ================= 全域視窗掛載 ================= */
+      /* ================= 全域掛載 ================= */
       global.startMode = startMode;
       global.navigateTo = navigateTo;
       global.filterAreaSpots = filterAreaSpots;
